@@ -3,15 +3,15 @@
     height:100%;
     background-color: #efefef;
     position:fixed!important;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     z-index:1;
     padding-top: 1%;
     padding-left: 1.5%;
     overflow:auto;
 }
 ul{
-    padding: 0px;
+    padding: 0;
 }
 .sidebar h3, li{
     padding: 10px 8px 10px 16px;
@@ -36,12 +36,12 @@ a {
     position: fixed;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 98%;
     border-top: black;
     background-color: black;
     padding: 30px;
     text-align: center;
-    color: white;
+    color: black;
     z-index: 2;
 }
 
@@ -53,4 +53,25 @@ a {
     padding: 12px 16px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.dropup {
+    position: relative;
+    display: inline-block;
+}
+
+.dropup-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    right: 0;
+    min-width: 160px;
+    bottom: 50px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 3;
+}
+
+.dropup:hover .dropup-content {
+    display: block;
 }
