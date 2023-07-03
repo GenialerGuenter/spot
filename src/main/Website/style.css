@@ -1,11 +1,35 @@
 .sidebar{
-    width:25%;
+    width:18%;
     height:100%;
-    width:200px;
-    background-color:#fff;
+    background-color: #efefef;
     position:fixed!important;
+    top: 0px;
+    left: 0px;
     z-index:1;
-    overflow:auto
+    padding-top: 1%;
+    padding-left: 1.5%;
+    overflow:auto;
+}
+ul{
+    padding: 0px;
+}
+.sidebar h3, li{
+    padding: 10px 8px 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 25px;
+}
+.sidebar li {
+    border: 5px solid #cdcdcd;
+    border-radius: 15px;
+    margin-right: 8%;
+}
+a {
+    text-decoration: none;
+}
+.sidebar li:hover{
+    background-color: #5f6265;
+    color: white;
 }
 
 .footer{
@@ -21,7 +45,7 @@
     z-index: 2;
 }
 
-.button{
+.playbutton{
     background-color: black;
     border: none;
     border-radius: 50%;
