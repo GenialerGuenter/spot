@@ -8,3 +8,25 @@
     overflow:auto
 }
 
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: black;
+    background-color: black;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+
+.button{
+    background-color: black;
+    border: none;
+    border-radius: 50%;
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
