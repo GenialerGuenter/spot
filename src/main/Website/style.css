@@ -88,6 +88,27 @@ a {
     z-index: 3;
 }
 
+.actSong{
+    color: white;
+    position: absolute;
+    width: 400px;
+    float: left;
+    bottom: 20px;
+    margin-top: 0;
+    margin-left: 15%;
+    border-style: solid;
+    border-color: white;
+}
+
+.actSongTable{
+    width: 100%;
+    border: none;
+}
+
+.actSongTable th{
+    text-align: left;
+}
+
 .show {
     display:block;
 }
