@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Spot</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="script" href="index.js">
     <script src="https://kit.fontawesome.com/ac0acee796.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -33,11 +34,22 @@
     </button>
 
     <div class="dropup" style="float:right">
-        <div class="dropup-content">
+        <div id="myDropup" class="dropup-content">
             <p>Hello World!</p>
         </div>
-        <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
+        <button id="myBtn" class="playbutton">
+            <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
+        </button>
     </div>
+
+    <script>
+        document.getElementById("myBtn").onclick = function() {showDropup()};
+
+        /* showDropUp toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+        function showDropup() {
+            document.getElementById("myDropup").classList.toggle("show");
+        }
+    </script>
 </div>
 
 </body>

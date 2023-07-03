@@ -72,6 +72,6 @@ a {
     z-index: 3;
 }
 
-.dropup:hover .dropup-content {
-    display: block;
+.show {
+    display:block;
 }
