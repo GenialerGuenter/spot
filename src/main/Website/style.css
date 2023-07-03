@@ -1,7 +1,10 @@
+body{
+    font-family: Tahoma;
+}
 .sidebar{
     width:18%;
     height:100%;
-    background-color: #efefef;
+    background-color: #e1e1e1;
     position:fixed!important;
     top: 0;
     left: 0;
@@ -9,26 +12,39 @@
     padding-top: 1%;
     padding-left: 1.5%;
     overflow:auto;
+    border-right: 2px solid #bebebe;
 }
 ul{
     padding: 0;
 }
-.sidebar h3, li{
+.sidebar h3, li {
     padding: 10px 8px 10px 16px;
     text-decoration: none;
     display: block;
     font-size: 25px;
+
 }
 .sidebar li {
-    border: 5px solid #cdcdcd;
+    border: 4px solid rgba(8, 0, 0, 0.32);
     border-radius: 15px;
     margin-right: 8%;
+    margin-top: 10px;
+}
+.sidebar button{
+    padding: 10px 16px 10px 16px;
+    font-size: 25px;
+    border-radius: 15px;
+    border: 4px solid rgba(8, 0, 0, 0.32);
+    background-color: transparent;
+}
+ button:active {
+    transform: scale(0.95);
 }
 a {
     text-decoration: none;
 }
-.sidebar li:hover{
-    background-color: #5f6265;
+.sidebar li:hover, .sidebar button:hover{
+    background-color: #acacac;
     color: white;
 }
 
