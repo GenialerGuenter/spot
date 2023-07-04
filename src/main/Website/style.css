@@ -80,6 +80,17 @@ a {
     cursor: pointer;
 }
 
+.deletebutton{
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    padding: 12px 16px;
+    margin-bottom: 40%;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .dropup {
     position: relative;
     display: inline-block;
@@ -88,9 +99,10 @@ a {
 .dropup-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: white;
     right: 0;
-    min-width: 160px;
+    width: 800%;
+    height: 2000%;
     bottom: 50px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     padding: 12px 16px;
@@ -109,13 +121,41 @@ a {
     border-color: white;
 }
 
-.actSongTable{
+.waitSong{
+    color: black;
+    position: relative;
+    width: 90%;
+    float: left;
+    bottom: 20px;
+    margin-top: 5%;
+    margin-left: 5%;
+    border-style: solid;
+    border-color: black;
+}
+
+.songTable{
     width: 100%;
     border: none;
 }
 
-.actSongTable th{
+.songTable th{
     text-align: left;
+}
+
+.waitList{
+    width: 100%;
+}
+
+.waitList th{
+    width: 80%;
+}
+
+.songBtn{
+    border: none;
+    width: 100%;
+    background-color: white;
+    font-weight: bold;
+    font-size: 100%;
 }
 
 .show {
