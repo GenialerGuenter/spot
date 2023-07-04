@@ -61,11 +61,21 @@ a {
 
 /*Der Style für die Playlistüberschrift und den Playbutton*/
 
-.playlistandbutton{
-    display: inline-block;
+.searchbardiv{
+    padding-left: 100px;
+    padding-top: 1%;
+
 }
-.playlistandbutton button{
-    margin-left: 50px;
+
+/* Styling der Suchleiste*/
+.searchbardiv input{
+    border: 2px solid;
+    border-radius: 5px;
+    margin-top: 8px;
+    font-size: 25px;
+    padding: 10px;
+    padding-right: 500px;
+
 }
 
 
