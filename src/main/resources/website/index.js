@@ -9,8 +9,17 @@ function showDropup() {
 
 fetch("http://localhost:8080/api/song").then(
     o => {
-        return o.json
+        //console.log(o.json())
+        return o.json()
     }
 ).then(
-    document.getElementById("songListe")
+    json => {
+        json.forEach(element => {
+            console.log(element)
+            document.getElementById("songListe")
+                .getElementsByTagName("tbody")
+                .innerHTML = "<td>" + element.titel + "</td>" +
+                "<td>" + element.artist + "</td>" + "<td>" + element.length + "</td>"
+        })
+    }
 )
