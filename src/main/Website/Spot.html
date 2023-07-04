@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Spot ♫</title>
+    <!-- Verlinkung des Stylesheets -->
     <link rel="stylesheet" href="style.css">
+    <!-- Verlinkung des json Scripts -->
     <link rel="script" href="index.js">
+    <!-- Verlinkung des Iconkits -->
     <script src="https://kit.fontawesome.com/ac0acee796.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<!-- Die Sidebar -->
 <div class="sidebar">
+    <!-- Der Homebutton -->
     <button class="homebutton">Home</button>
+    <!-- Überschrift Playlist -->
     <h3 class="playlist-title">Playlists</h3>
 
+    <!-- Liste der bestehenden Playlists + Button für neue Playlists -->
     <ul>
         <button class="newplaylist">✚ Neue Playlist</button>
         <li class="playlist-sidebar"><a href="#">Playlist 1</a></li>
@@ -21,12 +28,15 @@
 
 </div>
 
+<!-- Hauptseite -->
 <div style="margin-left:20%" class="content">
+    <!-- Playlistname und Playbutton -->
     <div >
         <h1 class="playlistandbutton">Playlistname</h1>
 
         <button class="playlistandbutton" >play</button>
     </div>
+    <!-- In der Playlist vorhandene Songs -->
     <div class="songsinplaylist">
         <ul>
             <li>Never Gonna Give You Up - Rick Astley --- 4:20 min</li>
@@ -34,8 +44,11 @@
         </ul>
     </div>
 </div>
+
+<!-- Footer -->
 <div class="footer">
 
+    <!-- Der aktuell spielende Song -->
     <div class="actSong">
         <table class="songTable">
             <tr>
@@ -48,6 +61,7 @@
         </table>
     </div>
 
+    <!-- Die Buttons für Skip, Back und Play -->
     <button class="playbutton" onclick="window.location.href='#';">
         <i class="fa-solid fa-backward fa-2xl" style="color: #ffffff;"></i>
     </button>
@@ -58,11 +72,15 @@
         <i class="fa-solid fa-forward fa-2xl" style="color: #ffffff;"></i>
     </button>
 
+    <!-- Die Warteschlange -->
     <div class="dropup" style="float:right">
+        <!-- Das Warteschlangenfenster -->
         <div id="myDropup" class="dropup-content">
+            <!-- Die Funktionen mit den Buttons und den nächsten Songs -->
             <table class="waitList">
                 <tr>
                     <th>
+                        <!-- Die nächsten Songs als Buttons, um zum jeweiligen Song direkt springen zu können -->
                         <button class="songBtn">
                             <div class="waitSong">
                                 <table class="songTable">
@@ -77,17 +95,20 @@
                             </div>
                         </button>
                     </th>
+                    <!-- Der Button, welcher den Song nach unten verschiebt. Nur nach unten möglich, da es der oberste Song ist. -->
                     <td colspan="2">
                         <button class="deletebutton" onclick="window.location.href='#';">
                             <i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>
                         </button>
                     </td>
+                    <!-- Button um den Song aus der Warteschlange zu entfernen -->
                     <td>
                         <button class="deletebutton" onclick="window.location.href='#';">
                             <i class="fa-solid fa-xmark fa-2xl" style="color: #000000;"></i>
                         </button>
                     </td>
                 </tr>
+                <!-- Dasselbe wie zuvor für weitere Songs -->
                 <tr>
                     <th>
                         <button class="songBtn">
@@ -181,11 +202,13 @@
                 </tr>
             </table>
         </div>
+        <!-- Der Button um die Warteschlange auszuklappen -->
         <button id="myBtn" class="playbutton">
             <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
         </button>
     </div>
 
+    <!-- Das Skript für den Button -->
     <script>
         document.getElementById("myBtn").onclick = function() {showDropup()};
 

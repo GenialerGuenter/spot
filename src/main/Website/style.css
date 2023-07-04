@@ -1,6 +1,10 @@
 body{
     font-family: Tahoma;
 }
+
+
+/*Der Style für die Sidebar und alles dort enthaltene*/
+
 .sidebar{
     width: 15%;
     height:100%;
@@ -50,12 +54,18 @@ a {
     color: white;
 }
 
+
+/*Der Style für die Playlistüberschrift und den Playbutton*/
+
 .playlistandbutton{
     display: inline-block;
 }
 .playlistandbutton button{
     margin-left: 50px;
 }
+
+
+/*Der Style für den Footer*/
 
 .footer{
     position: fixed;
@@ -70,6 +80,10 @@ a {
     z-index: 2;
 }
 
+
+
+/*Der Style für die Buttons Play, Skip und Back*/
+
 .playbutton{
     background-color: black;
     border: none;
@@ -79,6 +93,8 @@ a {
     font-size: 16px;
     cursor: pointer;
 }
+
+/*Der Style für sämtliche Buttons auf der Warteschlange*/
 
 .deletebutton{
     background-color: white;
@@ -91,11 +107,14 @@ a {
     cursor: pointer;
 }
 
+
+
+/*Die Styles für den dropupbutton sowie den dropup Inhalt*/
+
 .dropup {
     position: relative;
     display: inline-block;
 }
-
 .dropup-content {
     display: none;
     position: absolute;
@@ -108,6 +127,14 @@ a {
     padding: 12px 16px;
     z-index: 3;
 }
+/*Die Änderung die stattfinden soll, wenn auf den dropupbutton gedrückt wird*/
+.show {
+    display:block;
+}
+
+
+
+/*Die Styles für die verschiedenen Songarten*/
 
 .actSong{
     color: white;
@@ -120,7 +147,6 @@ a {
     border-style: solid;
     border-color: white;
 }
-
 .waitSong{
     color: black;
     position: relative;
@@ -132,32 +158,23 @@ a {
     border-style: solid;
     border-color: black;
 }
-
 .songTable{
     width: 100%;
     border: none;
 }
-
 .songTable th{
     text-align: left;
 }
-
 .waitList{
     width: 100%;
 }
-
 .waitList th{
     width: 80%;
 }
-
 .songBtn{
     border: none;
     width: 100%;
     background-color: white;
     font-weight: bold;
     font-size: 100%;
-}
-
-.show {
-    display:block;
 }
