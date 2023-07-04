@@ -366,3 +366,47 @@ SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42104-214]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden (diese Datenbank ist leer)
 Table "DATABASECHANGELOG" not found (this database is empty); SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42104-214]
+2023-07-04 13:17:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden (diese Datenbank ist leer)
+Table "DATABASECHANGELOG" not found (this database is empty); SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42104-214]
+2023-07-04 13:20:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden (diese Datenbank ist leer)
+Table "DATABASECHANGELOG" not found (this database is empty); SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42104-214]
+2023-07-04 13:21:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden (diese Datenbank ist leer)
+Table "DATABASECHANGELOG" not found (this database is empty); SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42104-214]
+2023-07-04 13:22:21 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Datenumwandlungsfehler beim Umwandeln von "'Rick Astley' (SONG: ""LENGTH"" INTEGER NOT NULL)"
+Data conversion error converting "'Rick Astley' (SONG: ""LENGTH"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SONG"("ID","ARTIST","LENGTH","TITLE")VALUES(?,?,?,?) [22018-214]
+2023-07-04 13:22:21 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Datenumwandlungsfehler beim Umwandeln von "'Rick Astley' (SONG: ""LENGTH"" INTEGER NOT NULL)"
+Data conversion error converting "'Rick Astley' (SONG: ""LENGTH"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SONG"("ID","ARTIST","LENGTH","TITLE")VALUES(?,?,?,?) [22018-214]
+2023-07-04 13:22:47 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Datenumwandlungsfehler beim Umwandeln von "'Rick Astley' (SONG: ""LENGTH"" INTEGER NOT NULL)"
+Data conversion error converting "'Rick Astley' (SONG: ""LENGTH"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SONG"("ID","ARTIST","LENGTH","TITLE")VALUES(?,?,?,?) [22018-214]
+2023-07-04 13:22:47 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Datenumwandlungsfehler beim Umwandeln von "'Rick Astley' (SONG: ""LENGTH"" INTEGER NOT NULL)"
+Data conversion error converting "'Rick Astley' (SONG: ""LENGTH"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SONG"("ID","ARTIST","LENGTH","TITLE")VALUES(?,?,?,?) [22018-214]
+2023-07-04 13:23:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 13:30:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 13:33:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 13:59:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
