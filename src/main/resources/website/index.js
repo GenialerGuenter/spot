@@ -11,14 +11,12 @@ var songlist = document.getElementById('songListe').getElementsByTagName('tbody'
 
 fetch("http://localhost:8080/api/song").then(
     o => {
-        //console.log(o.json())
         return o.json()
     }
 ).then(
     json => {
         json.forEach(element => {
-            console.log(element)
-            var matchHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+date+'</td><td>'+element.length+'</td></tr>'
+            var matchHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+element.length+'</td></tr>'
             var newRow = songlist.insertRow(songlist.rows.length)
             newRow.innerHTML = matchHTML;
         })
