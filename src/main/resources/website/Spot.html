@@ -46,10 +46,9 @@
 <!-- Hauptseite -->
 <div style="margin-left:20%" class="content">
     <!-- Playlistname und Playbutton -->
-    <div>
-        <h1 class="playlistandbutton">Playlistname</h1>
+    <div class="searchbardiv">
+        <input type="text" id="searchbar" placeholder="search...">
 
-        <button class="playlistandbutton">play</button>
     </div>
     <!-- In der Playlist vorhandene Songs -->
     <div class="songsinplaylist">
@@ -61,7 +60,7 @@
                     <th>Dauer</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="songtablebody">
             </tbody>
 
         </table>
