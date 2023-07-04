@@ -7,6 +7,8 @@ function showDropup() {
     document.getElementById("myDropup").classList.toggle("show");
 }
 
+var songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
+
 fetch("http://localhost:8080/api/song").then(
     o => {
         //console.log(o.json())
@@ -16,10 +18,9 @@ fetch("http://localhost:8080/api/song").then(
     json => {
         json.forEach(element => {
             console.log(element)
-            document.getElementById("songListe")
-                .getElementsByTagName("tbody")
-                .innerHTML = "<td>" + element.titel + "</td>" +
-                "<td>" + element.artist + "</td>" + "<td>" + element.length + "</td>"
+            var matchHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+date+'</td><td>'+element.length+'</td></tr>'
+            var newRow = songlist.insertRow(songlist.rows.length)
+            newRow.innerHTML = matchHTML;
         })
     }
 )
