@@ -533,3 +533,19 @@ SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
 Table "DATABASECHANGELOG" not found; SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 15:11:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 15:16:25 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Datenumwandlungsfehler beim Umwandeln von "'' (SONG: ""ID"" BIGINT NOT NULL)"
+Data conversion error converting "'' (SONG: ""ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SONG"("ID","ARTIST","LENGTH","TITLE")VALUES(?,?,?,?) [22018-214]
+2023-07-04 15:16:25 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Datenumwandlungsfehler beim Umwandeln von "'' (SONG: ""ID"" BIGINT NOT NULL)"
+Data conversion error converting "'' (SONG: ""ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SONG"("ID","ARTIST","LENGTH","TITLE")VALUES(?,?,?,?) [22018-214]
+2023-07-04 15:16:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
