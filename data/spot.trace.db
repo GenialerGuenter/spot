@@ -422,11 +422,31 @@ SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
 Table "DATABASECHANGELOG" not found; SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 14:48:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 14:49:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
 2023-07-04 14:50:46 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
 Table "DATABASECHANGELOG" not found; SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
 2023-07-04 14:51:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 14:52:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 14:54:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 14:54:53 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
 Table "DATABASECHANGELOG" not found; SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
@@ -498,6 +518,10 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	... 47 more
 2023-07-04 14:56:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-04 14:57:31 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
 Table "DATABASECHANGELOG" not found; SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
