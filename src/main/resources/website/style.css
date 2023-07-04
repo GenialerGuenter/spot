@@ -9,13 +9,14 @@ body{
     width: 15%;
     height:100%;
     background-color: #e1e1e1;
-    position:fixed!important;
+    position: fixed!important;
     top: 0;
     left: 0;
     z-index:1;
     padding-top: 1%;
     padding-left: 1.5%;
-    overflow: scroll;
+    padding-bottom: 300px;
+    overflow: auto;
     border-right: 2px solid #bebebe;
 
 }
