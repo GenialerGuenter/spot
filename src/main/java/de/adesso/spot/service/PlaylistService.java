@@ -1,7 +1,7 @@
 package de.adesso.spot.service;
 
-import de.adesso.spot.model.Song;
-import de.adesso.spot.persistence.SongRepository;
+import de.adesso.spot.model.Playlist;
+import de.adesso.spot.persistence.PlaylistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +9,14 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class SongService {
+public class PlaylistService {
 
-    private final SongRepository repository;
+    private final PlaylistRepository repository;
 
-    public List<Song> getAllSongs() {
+    public List<Playlist> getAllPlaylists(){
         return repository.findAll()
                 .stream()
-                .map(SongMapper::toSong)
+                .map(PlaylistMapper::toPlaylist)
                 .toList();
     }
 
