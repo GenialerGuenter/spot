@@ -114,7 +114,7 @@ function getAllSongs() {
             json.forEach(element => {
                 songlistGlobal[i] = element
                 const songHTML = '<tr><td>' + element.titel + '</td><td>' + element.artist + '</td><td>' +
-                    element.length + '</td><td>' +
+                    toMinSec(element.length) + '</td><td>' +
                     '<button class="deletebutton" onclick="addToWait(' + i + ');">' +
                     '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
                     '</button></td></tr>';
@@ -189,7 +189,7 @@ function playlist(id) {
                     searchBar.innerHTML = '<h1 id="playlistname">' + element.name + '</h1><button onclick="playPlaylist()">cock</button>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
-                            var songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' + song.length + '</td></tr>'
+                            var songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' + toMinSec(song.length) + '</td></tr>'
                             var newRow = songlist.insertRow(songlist.rows.length)
                             newRow.innerHTML = songHTML;
                         }
@@ -228,9 +228,12 @@ function playQueue(){
 
 
 }
-// function debugqueue(){
-//     console.log(queue.length)
-//
-// }
-// debugqueue()
-// setInterval(debugqueue,1000)
+function toMinSec(time){
+    let min = Math.floor(time/60)
+    let sec = time%60
+    if (sec < 10){
+        sec = sec +'0'
+    }
+    var timeInMinSec = min+':'+sec
+    return timeInMinSec
+}
