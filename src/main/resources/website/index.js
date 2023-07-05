@@ -89,7 +89,6 @@ function playlist(id){
         json => {
             json.forEach(element => {
                 if(element.id === id){
-                    console.log(element)
                     searchBar.innerHTML = '<h1 id="playlistname">'+element.name+'</h1>'
                     songlist.innerHTML = ""
                     element.songs.forEach( song => {
