@@ -142,6 +142,7 @@ fetch("http://localhost:8080/api/playlist").then(
 
 
 //Funktion um die Suchleiste suchen zu lassen
+setInterval(searchBarSearch,500)
 function searchBarSearch() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchbar");
