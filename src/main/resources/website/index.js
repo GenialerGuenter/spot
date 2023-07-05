@@ -1,12 +1,10 @@
-
-var playlistlist = document.getElementById('sidebar')
-var songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
-var searchBar = document.getElementById('searchbardiv');
+const playlistlist = document.getElementById('sidebar');
+const songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
+const searchBar = document.getElementById('searchbardiv');
 const songlistGlobal = [];
 const playlistlistGlobal = [];
-var waitinglist = 0;
+let waitinglist = 0;
 const wait = [];
-var queue = []
 
 getAllSongs()
 
@@ -33,66 +31,62 @@ function actWaitList() {
     const dropup = document.getElementById("waitList")
     dropup.innerHTML = ""
     let i = 0
+    if(wait.length === 0){
+        document.getElementById("actName").innerText = "-----"
+        document.getElementById("actLength").innerText = "--"
+        document.getElementById("actArtist").innerText = "---"
+    }
     wait.forEach(element => {
-        console.log(wait.length)
-        let waitHTML = '<th><button class="songBtn"><div class="waitSong">\n' +
-            '<table class="songTable"><tr><th>' + songlistGlobal[element].titel + '</th>\n' +
-            '<td rowspan="2">' + songlistGlobal[element].length + '</td></tr>\n' +
-            '<tr><th>' + songlistGlobal[element].artist + '</th>\</tr>\n' +
-            '</table>\n' +
-            '</div>\n' +
-            '</button>\n' +
-            '</th>\n' +
-            '<td colspan="2">\n' +
-            '</td>\n'
-        if(wait.length === 2){
-            if(i === 0){
-                waitHTML += '<td colspan="2">\n' +
-                    '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
-                    '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
-                    '</button>\n' +
-                    '</td>\n'
-            }else{
-                waitHTML += '<td colspan="2">\n' +
-                    '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
-                    '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
-                    '</button>\n' +
-                    '</td>\n'
+        if(i === 0){
+            document.getElementById("actName").innerText = songlistGlobal[element].titel
+            document.getElementById("actLength").innerText = toMinSec(songlistGlobal[element].length)
+            document.getElementById("actArtist").innerText = songlistGlobal[element].artist
+        }else{
+            console.log(wait.length)
+            let waitHTML = '<th><button class="songBtn"><div class="waitSong">\n' +
+                '<table class="songTable"><tr><th>' + songlistGlobal[element].titel + '</th>\n' +
+                '<td rowspan="2">' + toMinSec(songlistGlobal[element].length) + '</td></tr>\n' +
+                '<tr><th>' + songlistGlobal[element].artist + '</th>\</tr>\n' +
+                '</table>\n' +
+                '</div>\n' +
+                '</button>\n' +
+                '</th>\n' +
+                '<td colspan="2">\n' +
+                '</td>\n'
+            if (wait.length >= 3) {
+                if (i === 1) {
+                    waitHTML += '<td colspan="2">\n' +
+                        '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                        '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
+                        '</button>\n' +
+                        '</td>\n'
+                } else if (i === wait.length - 1) {
+                    waitHTML += '<td colspan="2">\n' +
+                        '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                        '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
+                        '</button>\n' +
+                        '</td>\n'
+                } else {
+                    waitHTML += '<td>\n' +
+                        '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                        '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
+                        '</button>\n' +
+                        '</td>\n' + '<td>\n' +
+                        '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                        '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
+                        '</button>\n' +
+                        '</td>\n'
+                }
             }
-        }else if(wait.length >= 2){
-            if(i === 0){
-                waitHTML += '<td colspan="2">\n' +
-                    '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
-                    '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
-                    '</button>\n' +
-                    '</td>\n'
-            }else if(i === wait.length - 1){
-                waitHTML += '<td colspan="2">\n' +
-                    '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
-                    '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
-                    '</button>\n' +
-                    '</td>\n'
-            }else{
-                waitHTML += '<td>\n' +
-                    '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
-                    '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
-                    '</button>\n' +
-                    '</td>\n' + '<td>\n' +
-                    '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
-                    '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
-                    '</button>\n' +
-                    '</td>\n'
-            }
+
+            waitHTML += '<td>' +
+                '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                '<i class="fa-solid fa-xmark fa-2xl" style="color: #000000;"></i>\n' +
+                '</button>\n' +
+                '</td>'
+            const newRow = dropup.insertRow(dropup.rows.length);
+            newRow.innerHTML = waitHTML
         }
-
-        waitHTML += '<td>'+
-            '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
-            '<i class="fa-solid fa-xmark fa-2xl" style="color: #000000;"></i>\n' +
-            '</button>\n' +
-            '</td>'
-
-        const newRow = dropup.insertRow(dropup.rows.length);
-        newRow.innerHTML = waitHTML
         i++
     })
 }
@@ -203,31 +197,29 @@ function playlist(id) {
 
 }
 
-function playPlaylist(){
-    addToQueue({titel: 'Never gonna give you down', artist: 'Rick Astley', length: 50})
-    addToQueue({titel: 'Never gonna give yormon', artist: 'Rick Ast', length: 50})
-    addToQueue({titel: 'Never gonna give kokain', artist: 'Rick Ast', length: 50})
-    addToQueue({titel: 'Never gonna give cock', artist: 'Rick Ast', length: 150})
-    playQueue()
-}
-function addToQueue(song){
-    queue[queue.length] = song;
-}
 function playQueue(){
-    if (queue.length >= 1){
-        var duration = queue[0].length
-        console.log(queue[0])
-        setTimeout(decrementQueue,duration*100)
+    if (wait.length >= 1){
+        var duration = songlistGlobal[wait[0]].length
+        console.log(songlistGlobal[wait[0]])
+        setTimeout(decrementQueue,duration*1000)
         function decrementQueue(){
-            queue.shift()
-            console.log(queue)
-            if (queue != []){
+            wait.shift()
+            waitinglist--
+            console.log(wait)
+            if (wait != []){
+                actWaitList()
                 playQueue()
             }
+            actWaitList()
         }
     }
 
+}
 
+function playPlaylist(){
+    addToWait(0)
+    addToWait(1)
+    playQueue()
 }
 function toMinSec(time){
     let min = Math.floor(time/60)

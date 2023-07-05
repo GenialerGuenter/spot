@@ -56,11 +56,11 @@
     <div class="actSong">
         <table class="songTable">
             <tr>
-                <th>Name</th>
-                <td rowspan="2">Dauer</td>
+                <th id="actName">-----</th>
+                <td rowspan="2" id="actLength">--</td>
             </tr>
             <tr>
-                <th>Künstler*in</th>
+                <th id ="actArtist">---</th>
             </tr>
         </table>
     </div>
@@ -69,7 +69,7 @@
     <button class="playbutton" onclick="window.location.href='#';">
         <i class="fa-solid fa-backward fa-2xl" style="color: #ffffff;"></i>
     </button>
-    <button class="playbutton" onclick="window.location.href='#';">
+    <button class="playbutton" onclick="playQueue();">
         <i class="fa-regular fa-circle-play fa-2xl" style="color: #ffffff;"></i>
     </button>
     <button class="playbutton" onclick="window.location.href='#';">
