@@ -1,11 +1,10 @@
 package de.adesso.spot.persistence;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "SONG")
@@ -25,5 +24,8 @@ public class SongEntity {
 
     @Column(name = "LENGTH", nullable = false)
     private Integer length;
+
+    @ManyToMany(mappedBy = "playlistSongs")
+    private List<PlaylistEntity> playlists;
 
 }
