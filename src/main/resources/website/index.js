@@ -85,9 +85,9 @@ function playlist(id){
     ).then(
         json => {
             json.forEach(element => {
-                var matchHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+element.length+'</td></tr>'
-                var newRow = songlist.insertRow(songlist.rows.length)
-                newRow.innerHTML = matchHTML;
+                if(element.id = id){
+
+                }
             })
 
         }
