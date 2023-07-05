@@ -8,6 +8,7 @@ function showDropup() {
 }
 
 var songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
+var searchBar = document.getElementById('searchbardiv');
 
 fetch("http://localhost:8080/api/song").then(
     o => {
@@ -47,9 +48,34 @@ function searchBarSearch(){
 }
 
 function home(id){
-
+    console.log('home')
+    searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
+    songlist.className = "song-main-table"
 }
 
+
+
+ //Verändert die seite zur Playlistanzeige und gibt die songs in der Playlist aus
 function playlist(id){
+    console.log('playlist'+ searchBar);
+
+    searchBar.innerHTML = '<h1 id="playlistname">Playlistname</h1>'
+
+    songlist.className = "song-playlist-table"
+
+    fetch(`http://localhost:8080/api/song/playlist${id}`).then(
+        o => {
+            return o.json()
+        }
+    ).then(
+        json => {
+            json.forEach(element => {
+                var matchHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+element.length+'</td></tr>'
+                var newRow = songlist.insertRow(songlist.rows.length)
+                newRow.innerHTML = matchHTML;
+            })
+
+        }
+    )
 
 }

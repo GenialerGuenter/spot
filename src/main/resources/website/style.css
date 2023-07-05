@@ -61,14 +61,15 @@ a {
 
 /*Der Style für die Playlistüberschrift und den Playbutton*/
 
-.searchbardiv{
+#searchbardiv{
     padding-left: 100px;
     padding-top: 1%;
+    position: fixed;
 
 }
 
 /* Styling der Suchleiste*/
-.searchbardiv input{
+#searchbardiv input{
     border: 2px solid;
     border-radius: 5px;
     margin-top: 8px;
@@ -77,12 +78,10 @@ a {
     padding-right: 500px;
 
 }
-
-
-/*Der Style für den Footer*/
+/*style für die songliste der homepge*/
 
 .song-main-table{
-    padding-top: 5%;
+    padding-top: 10%;
     border: none;
     text-align: left;
 }
@@ -92,6 +91,20 @@ a {
     border: none;
     padding-left: 100px;
 }
+
+.song-playlist-table{
+    padding-top:0%;
+    border: none;
+    text-align: left;
+}
+.song-playlist-table th,.song-playlist-table td {
+    font-size: 25px;
+    padding: 15px;
+    border: none;
+    padding-left: 100px;
+}
+
+/*Der Style für den Footer*/
 
 .footer{
     position: fixed;

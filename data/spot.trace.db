@@ -517,3 +517,15 @@ SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
 Table "DATABASECHANGELOG" not found; SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-05 10:01:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-05 10:35:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-07-05 10:43:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "DATABASECHANGELOG" nicht gefunden
+Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
