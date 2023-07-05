@@ -46,6 +46,10 @@ ul{
     background-color: transparent;
     margin-right: 8%;
 }
+#newplaylistbutton{
+    margin-bottom: 4%;
+}
+
  button:active {
     transform: scale(0.95);
 }

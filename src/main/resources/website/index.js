@@ -38,7 +38,7 @@ fetch("http://localhost:8080/api/playlist").then(
 ).then(
     json => {
         json.forEach(element => {
-            var playlistHTML = '<button className="newplaylist" onClick="playlist('+ element.id +')">'+ element.name +'</button>'
+            var playlistHTML = '<button id="newplaylistbutton" onClick="playlist('+ element.id +')">'+ element.name +'</button>'
             playlistlist.innerHTML += playlistHTML;
         })
     }
@@ -77,7 +77,7 @@ function home(){
 
  //Verändert die seite zur Playlistanzeige und gibt die songs in der Playlist aus
 function playlist(id){
-    searchBar.innerHTML = '<h1 id="playlistname">Playlistname</h1>'
+
 
     songlist.className = "song-playlist-table"
 
@@ -89,6 +89,8 @@ function playlist(id){
         json => {
             json.forEach(element => {
                 if(element.id === id){
+                    console.log(element)
+                    searchBar.innerHTML = '<h1 id="playlistname">'+element.name+'</h1>'
                     songlist.innerHTML = ""
                     element.songs.forEach( song => {
                         var songHTML = '<tr><td>'+ song.titel+'</td><td>'+song.artist+'</td><td>'+song.length+'</td></tr>'
