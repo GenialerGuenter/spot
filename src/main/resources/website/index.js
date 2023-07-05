@@ -10,19 +10,24 @@ function showDropup() {
 var songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
 var searchBar = document.getElementById('searchbardiv');
 
-fetch("http://localhost:8080/api/song").then(
-    o => {
-        return o.json()
-    }
-).then(
-    json => {
-        json.forEach(element => {
-            var songHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+element.length+'</td></tr>'
-            var newRow = songlist.insertRow(songlist.rows.length)
-            newRow.innerHTML = songHTML;
-        })
-    }
-)
+getAllSongs()
+
+function getAllSongs(){
+    fetch("http://localhost:8080/api/song").then(
+        o => {
+            return o.json()
+        }
+    ).then(
+        json => {
+            songlist.innerHTML = ""
+            json.forEach(element => {
+                var songHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+element.length+'</td></tr>'
+                var newRow = songlist.insertRow(songlist.rows.length)
+                newRow.innerHTML = songHTML;
+            })
+        }
+    )
+}
 
 var playlistlist = document.getElementById('sidebar')
 
@@ -66,27 +71,37 @@ function home(){
     console.log('home')
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
+    getAllSongs()
 }
 
 
 
  //Verändert die seite zur Playlistanzeige und gibt die songs in der Playlist aus
 function playlist(id){
-    console.log('playlist'+ searchBar);
+    console.log('playlist'+ id);
 
     searchBar.innerHTML = '<h1 id="playlistname">Playlistname</h1>'
 
     songlist.className = "song-playlist-table"
 
-    fetch(`http://localhost:8080/api/song/playlist${id}`).then(
+    fetch(`http://localhost:8080/api/playlist`).then(
         o => {
             return o.json()
         }
     ).then(
         json => {
+            console.log(json)
             json.forEach(element => {
-                if(element.id = id){
-
+                if(element.id === id){
+                    console.log(element.songs)
+                    songlist.innerHTML = ""
+                    element.songs.forEach( song => {
+                        console.log(song)
+                        var songHTML = '<tr><td>'+ song.titel+'</td><td>'+song.artist+'</td><td>'+song.length+'</td></tr>'
+                        var newRow = songlist.insertRow(songlist.rows.length)
+                        newRow.innerHTML = songHTML;
+                        }
+                    )
                 }
             })
 

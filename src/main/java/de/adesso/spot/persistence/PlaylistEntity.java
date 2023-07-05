@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Table(name = "PLAYLIST")
 @Getter
@@ -14,7 +16,9 @@ public class PlaylistEntity {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
 
     @ManyToMany
     @JoinTable(

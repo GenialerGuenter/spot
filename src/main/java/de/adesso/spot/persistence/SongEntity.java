@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Table(name = "SONG")
 @Getter
@@ -13,6 +15,7 @@ import java.util.List;
 public class SongEntity {
 
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID")
     private Long id;
 
