@@ -213,16 +213,19 @@ function addToQueue(song){
     queue[queue.length] = song;
 }
 function playQueue(){
-    var duration = queue[0].length
-    console.log(queue[0])
-    setTimeout(decrementQueue,duration*100)
-    function decrementQueue(){
-        queue.shift()
-        console.log(queue)
-        if (queue != []){
-
+    if (queue.length >= 1){
+        var duration = queue[0].length
+        console.log(queue[0])
+        setTimeout(decrementQueue,duration*100)
+        function decrementQueue(){
+            queue.shift()
+            console.log(queue)
+            if (queue != []){
+                playQueue()
+            }
         }
     }
+
 
 }
 // function debugqueue(){
