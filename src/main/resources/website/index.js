@@ -1,3 +1,4 @@
+
 var playlistlist = document.getElementById('sidebar')
 var songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
 var searchBar = document.getElementById('searchbardiv');
@@ -5,6 +6,7 @@ const songlistGlobal = [];
 const playlistlistGlobal = [];
 var waitinglist = 0;
 const wait = [];
+var queue = []
 
 getAllSongs()
 
@@ -184,7 +186,7 @@ function playlist(id) {
                 playlistlistGlobal[i] = element
                 i++
                 if (element.id === id) {
-                    searchBar.innerHTML = '<h1 id="playlistname">' + element.name + '</h1>'
+                    searchBar.innerHTML = '<h1 id="playlistname">' + element.name + '</h1><button onclick="playPlaylist()">cock</button>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
                             var songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' + song.length + '</td></tr>'
@@ -199,3 +201,33 @@ function playlist(id) {
     )
 
 }
+
+function playPlaylist(){
+    addToQueue({titel: 'Never gonna give you down', artist: 'Rick Astley', length: 50})
+    addToQueue({titel: 'Never gonna give yormon', artist: 'Rick Ast', length: 50})
+    addToQueue({titel: 'Never gonna give kokain', artist: 'Rick Ast', length: 50})
+    addToQueue({titel: 'Never gonna give cock', artist: 'Rick Ast', length: 150})
+    playQueue()
+}
+function addToQueue(song){
+    queue[queue.length] = song;
+}
+function playQueue(){
+    var duration = queue[0].length
+    console.log(queue[0])
+    setTimeout(decrementQueue,duration*100)
+    function decrementQueue(){
+        queue.shift()
+        console.log(queue)
+        if (queue != []){
+
+        }
+    }
+
+}
+// function debugqueue(){
+//     console.log(queue.length)
+//
+// }
+// debugqueue()
+// setInterval(debugqueue,1000)
