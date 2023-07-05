@@ -62,7 +62,7 @@ function searchBarSearch(){
     }
 }
 
-function home(id){
+function home(){
     console.log('home')
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
