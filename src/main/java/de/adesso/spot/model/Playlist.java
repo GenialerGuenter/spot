@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 public class Playlist {
 
+    private Long id;
     private List<Song> songs;
     private String name;
 

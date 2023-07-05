@@ -8,6 +8,7 @@ class PlaylistMapper {
         return Playlist.builder()
                 .songs(entity.getPlaylistSongs().stream().map(SongMapper::toSong).toList())
                 .name(entity.getName())
+                .id(entity.getId())
                 .build();
     }
 }

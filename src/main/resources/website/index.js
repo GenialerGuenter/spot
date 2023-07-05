@@ -17,9 +17,24 @@ fetch("http://localhost:8080/api/song").then(
 ).then(
     json => {
         json.forEach(element => {
-            var matchHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+element.length+'</td></tr>'
+            var songHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+element.length+'</td></tr>'
             var newRow = songlist.insertRow(songlist.rows.length)
-            newRow.innerHTML = matchHTML;
+            newRow.innerHTML = songHTML;
+        })
+    }
+)
+
+var playlistlist = document.getElementById('sidebar')
+
+fetch("http://localhost:8080/api/playlist").then(
+    o => {
+        return o.json()
+    }
+).then(
+    json => {
+        json.forEach(element => {
+            var playlistHTML = '<button className="newplaylist" onClick="playlist('+ element.id +')">'+ element.name +'</button>'
+            playlistlist.innerHTML += playlistHTML;
         })
     }
 )
