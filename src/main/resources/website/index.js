@@ -112,7 +112,6 @@ function playlist(id){
                 playlistlistGlobal[i] = element
                 i++
                 if(element.id === id){
-                    console.log(element)
                     searchBar.innerHTML = '<h1 id="playlistname">'+element.name+'</h1>'
                     songlist.innerHTML = ""
                     element.songs.forEach( song => {
