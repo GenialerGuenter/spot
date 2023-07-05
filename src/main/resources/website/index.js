@@ -68,7 +68,6 @@ function searchBarSearch(){
 }
 
 function home(){
-    console.log('home')
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
     getAllSongs()
@@ -78,8 +77,6 @@ function home(){
 
  //Verändert die seite zur Playlistanzeige und gibt die songs in der Playlist aus
 function playlist(id){
-    console.log('playlist'+ id);
-
     searchBar.innerHTML = '<h1 id="playlistname">Playlistname</h1>'
 
     songlist.className = "song-playlist-table"
@@ -90,13 +87,10 @@ function playlist(id){
         }
     ).then(
         json => {
-            console.log(json)
             json.forEach(element => {
                 if(element.id === id){
-                    console.log(element.songs)
                     songlist.innerHTML = ""
                     element.songs.forEach( song => {
-                        console.log(song)
                         var songHTML = '<tr><td>'+ song.titel+'</td><td>'+song.artist+'</td><td>'+song.length+'</td></tr>'
                         var newRow = songlist.insertRow(songlist.rows.length)
                         newRow.innerHTML = songHTML;

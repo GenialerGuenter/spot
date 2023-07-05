@@ -23,8 +23,8 @@ public class PlaylistEntity {
     @ManyToMany
     @JoinTable(
             name="PLAYLIST_SONGS",
-            joinColumns = @JoinColumn(name = "SONG_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PLAYLIST_ID")
+            joinColumns = @JoinColumn(name = "PLAYLIST_ID"),
+            inverseJoinColumns = @JoinColumn(name = "SONG_ID")
     )
     private List<SongEntity> playlistSongs;
 
