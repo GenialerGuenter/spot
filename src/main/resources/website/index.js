@@ -45,3 +45,11 @@ function searchBarSearch(){
         }
     }
 }
+
+function home(id){
+
+}
+
+function playlist(id){
+
+}
