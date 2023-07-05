@@ -1,16 +1,35 @@
+
+var playlistlist = document.getElementById('sidebar')
+var songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
+var searchBar = document.getElementById('searchbardiv');
+const songlistGlobal = [];
+const playlistlistGlobal = [];
+var waitinglist = 0;
+const wait = [];
+
+getAllSongs()
+
 document.getElementById("myBtn").onclick = function () {
     showDropup()
 };
+
+function addToWait(song){
+    wait[waitinglist] = song
+    waitinglist++
+}
+
+function removeFromWait(){
+
+}
+
+function play(){
+
+}
 
 /* showDropUp toggles between adding and removing the show class, which is used to hide and show the dropdown content */
 function showDropup() {
     document.getElementById("myDropup").classList.toggle("show");
 }
-
-var songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
-var searchBar = document.getElementById('searchbardiv');
-
-getAllSongs()
 
 function getAllSongs(){
     fetch("http://localhost:8080/api/song").then(
@@ -20,7 +39,10 @@ function getAllSongs(){
     ).then(
         json => {
             songlist.innerHTML = ""
+            var i = 0
             json.forEach(element => {
+                songlistGlobal[i] = element
+                i++
                 var songHTML = '<tr><td>'+ element.titel+'</td><td>'+element.artist+'</td><td>'+element.length+'</td></tr>'
                 var newRow = songlist.insertRow(songlist.rows.length)
                 newRow.innerHTML = songHTML;
@@ -29,7 +51,6 @@ function getAllSongs(){
     )
 }
 
-var playlistlist = document.getElementById('sidebar')
 
 fetch("http://localhost:8080/api/playlist").then(
     o => {
@@ -80,7 +101,7 @@ function playlist(id){
 
 
     songlist.className = "song-playlist-table"
-
+    var i = 0
     fetch(`http://localhost:8080/api/playlist`).then(
         o => {
             return o.json()
@@ -88,6 +109,8 @@ function playlist(id){
     ).then(
         json => {
             json.forEach(element => {
+                playlistlistGlobal[i] = element
+                i++
                 if(element.id === id){
                     console.log(element)
                     searchBar.innerHTML = '<h1 id="playlistname">'+element.name+'</h1>'
