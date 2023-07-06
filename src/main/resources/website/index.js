@@ -359,3 +359,8 @@ function toMinSec(time) {
     }
     return min + ':' + sec;
 }
+
+function createPlaylst() {
+    alert('Platzhalter für Playlisterstellung')
+
+}
