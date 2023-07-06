@@ -368,7 +368,7 @@ function toMinSec(time) {
 
 function createPlaylst() {
     alert('Platzhalter für Playlisterstellung')
-    if (screen.width <= 540){
+    if (window.width <= 540){
         toggleSidebar()
     }
 
