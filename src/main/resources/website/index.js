@@ -136,7 +136,10 @@ fetch("http://localhost:8080/api/playlist").then(
 
 
 //Funktion um die Suchleiste suchen zu lassen
-setInterval(searchBarSearch,500)
+if(document.getElementById('searchbar').value != null){
+    setInterval(searchBarSearch,500)
+}
+
 function searchBarSearch() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchbar");
@@ -146,13 +149,14 @@ function searchBarSearch() {
 
     // Es soll eine Überprüfung aller Tabellenzeilen durchgeführt werden. Diejenigen, die nicht mit der Suchanfrage übereinstimmen, sollen ausgerottet werden!!
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
+        tr[i].style.display = "none";
+        for(var j=0; j<tr.length; j++){
+            td = tr[i].getElementsByTagName("td")[j];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter.toUpperCase()) > -1)                               {
+                    tr[i].style.display = "";
+                    break;
+                }
             }
         }
     }
