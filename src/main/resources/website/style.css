@@ -10,32 +10,28 @@ body{
     height:100%;
     background-color: #e1e1e1;
     position: fixed!important;
+    overflow: auto;
     top: 0;
     left: 0;
     z-index:1;
     padding-top: 1%;
     padding-left: 1.5%;
-    padding-bottom: 300px;
-    overflow: auto;
     border-right: 2px solid #bebebe;
 
 }
-ul{
-    padding: 0;
+.playlistlist{
+    padding-bottom: 110px;
 }
-.sidebar, h3, li {
+ul{
+    padding: 0 0 0 0;
+}
+.sidebar, h3{
     padding: 30px 20px 10px 20px;
     text-decoration: none;
     display: block;
     font-size: 25px;
     position: relative;
 
-}
-.sidebar li {
-    border: 3px solid rgb(155, 152, 152);
-    border-radius: 10px;
-    margin-top: 10px;
-    padding-top: 3%;
 }
 .sidebar button{
     width: 100%;

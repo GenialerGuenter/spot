@@ -1,6 +1,7 @@
 package de.adesso.spot.controller;
 
 import de.adesso.spot.model.Song;
+import de.adesso.spot.persistence.SongEntity;
 import de.adesso.spot.service.SongService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ import java.util.List;
 class SongController {
 
     private final SongService service;
+
+    @PostMapping()
+    SongEntity postSong(@RequestBody SongEntity newSong){ return service.createNewSong(newSong); }
 
     @GetMapping
     List<Song> getAllSongs() {

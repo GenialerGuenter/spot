@@ -6,12 +6,31 @@ const playlistlistGlobal = [];
 let waitinglist = 0;
 const wait = [];
 const history = [];
-var isPlaying = false;
-var countdownconter; //variable for the live playback
-var pausedtime =100;
-var wasPaused = false;
+let isPlaying = false;
+let countdownconter; //variable for the live playback
+let pausedtime = 100;
+let wasPaused = false;
 
+// createSong('Freebird', 'unbekannt', 500)
 getAllSongs()
+
+
+function createSong(titel, artist, length) {
+    fetch('http://localhost:8080/api/song', {
+        method: "POST",
+        body: JSON.stringify({
+            id: 1,
+            title: titel,
+            artist: artist,
+            length: length
+        }),
+        headers:{
+            "Content-type":"application/json; charset=UTF-8"
+        }
+    })
+        .then((response) => response.json())
+        .then((json) => console.log(json))
+}
 
 document.getElementById("myBtn").onclick = function () {
     showDropup()
@@ -25,24 +44,24 @@ function addToWait(songID) {
 }
 
 function actWaitList() {
-    wasPaused=false;
+    wasPaused = false;
     const dropup = document.getElementById("waitList")
     dropup.innerHTML = ""
     let i = 0
-    if(wait.length === 0){
-        isPlaying=false;
+    if (wait.length === 0) {
+        isPlaying = false;
         document.getElementById("actName").innerText = "-----"
         document.getElementById("actLength").innerText = "--"
         document.getElementById("actArtist").innerText = "---"
     }
     wait.forEach(element => {
-        if(i === 0){
+        if (i === 0) {
             document.getElementById("actName").innerText = songlistGlobal[element].titel
             document.getElementById("actLength").innerText = toMinSec(songlistGlobal[element].length)
             document.getElementById("actArtist").innerText = songlistGlobal[element].artist
-        }else{
+        } else {
             console.log(wait.length)
-            let waitHTML = '<th><button class="songBtn" onclick="moveToSong('+ i +')"><div class="waitSong">\n' +
+            let waitHTML = '<th><button class="songBtn" onclick="moveToSong(' + i + ')"><div class="waitSong">\n' +
                 '<table class="songTable"><tr><th>' + songlistGlobal[element].titel + '</th>\n' +
                 '<td rowspan="2">' + toMinSec(songlistGlobal[element].length) + '</td></tr>\n' +
                 '<tr><th>' + songlistGlobal[element].artist + '</th>\</tr>\n' +
@@ -55,9 +74,9 @@ function actWaitList() {
             if (wait.length >= 3) {
                 if (i === 1) {
                     let from = i
-                    let to = i +1
+                    let to = i + 1
                     waitHTML += '<td colspan="2">\n' +
-                        '<button class="deletebutton" onclick="moveSong(' + from + ','+ to +')">' +
+                        '<button class="deletebutton" onclick="moveSong(' + from + ',' + to + ')">' +
                         '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
                         '</button>\n' +
                         '</td>\n'
@@ -65,7 +84,7 @@ function actWaitList() {
                     let from = i
                     let to = i - 1
                     waitHTML += '<td colspan="2">\n' +
-                        '<button class="deletebutton" onclick="moveSong(' + from + ','+ to +');">\n' +
+                        '<button class="deletebutton" onclick="moveSong(' + from + ',' + to + ');">\n' +
                         '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
                         '</button>\n' +
                         '</td>\n'
@@ -74,11 +93,11 @@ function actWaitList() {
                     let up = i - 1
                     let down = i + 1
                     waitHTML += '<td>\n' +
-                        '<button class="deletebutton" onclick="moveSong(' + from + ','+ down +');">\n' +
+                        '<button class="deletebutton" onclick="moveSong(' + from + ',' + down + ');">\n' +
                         '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
                         '</button>\n' +
                         '</td>\n' + '<td>\n' +
-                        '<button class="deletebutton" onclick="moveSong(' + from + ', '+ up +')">' +
+                        '<button class="deletebutton" onclick="moveSong(' + from + ', ' + up + ')">' +
                         '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
                         '</button>\n' +
                         '</td>\n'
@@ -86,7 +105,7 @@ function actWaitList() {
             }
 
             waitHTML += '<td>' +
-                '<button class="deletebutton" onclick="deleteSong('+ i +');">\n' +
+                '<button class="deletebutton" onclick="deleteSong(' + i + ');">\n' +
                 '<i class="fa-solid fa-xmark fa-2xl" style="color: #000000;"></i>\n' +
                 '</button>\n' +
                 '</td>'
@@ -97,51 +116,51 @@ function actWaitList() {
     })
 }
 
-function moveSong(from, to){
+function moveSong(from, to) {
     let temp = wait[from]
     wait[from] = wait[to]
     wait[to] = temp
     actWaitList()
 }
 
-function moveToSong(song){
+function moveToSong(song) {
     const addhistory = wait.splice(0, song)
-    addhistory.forEach(song=>{
+    addhistory.forEach(song => {
         history.push(song)
     })
     waitinglist = waitinglist - song
     actWaitList()
 }
 
-function deleteSong(song){
+function deleteSong(song) {
     wait.splice(song, 1)
     waitinglist--
     actWaitList()
 }
 
-function nextSong(){
-    if(wait.length >= 1) {
+function nextSong() {
+    if (wait.length >= 1) {
         history.push(wait.shift())
         waitinglist--
         actWaitList()
     }
 }
 
-function previousSong(){
-    if(history.length > 0) {
+function previousSong() {
+    if (history.length > 0) {
         wait.unshift(history.pop())
         actWaitList()
     }
 }
 
-function playSong(song){
+function playSong(song) {
     clearWait()
     addToWait(song)
     actWaitList()
     playQueue(false)
 }
 
-function clearWait(){
+function clearWait() {
     history.push(wait[0])
     wait.splice(0, wait.length)
     waitinglist = 0
@@ -168,7 +187,7 @@ function getAllSongs() {
                     '<button class="deletebutton" onclick="addToWait(' + i + ');">' +
                     '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
                     '</button></td><td>' +
-                    '<button class="deletebutton" onclick="playSong('+ i +')">' +
+                    '<button class="deletebutton" onclick="playSong(' + i + ')">' +
                     '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
                     '</button></td></tr>';
                 const newRow = songlist.insertRow(songlist.rows.length);
@@ -195,12 +214,12 @@ fetch("http://localhost:8080/api/playlist").then(
 
 
 //Funktion um die Suchleiste suchen zu lassen
-if(document.getElementById('searchbar').value != null){
-    setInterval(searchBarSearch,500)
+if (document.getElementById('searchbar').value != null) {
+    setInterval(searchBarSearch, 500)
 }
 
 function searchBarSearch() {
-    let input, filter, table, tr, td, i, txtValue;
+    let input, filter, table, tr, td, i;
     input = document.getElementById("searchbar");
     filter = input.value.toUpperCase();
     table = document.getElementById("songtablebody");
@@ -209,10 +228,10 @@ function searchBarSearch() {
     // Es soll eine Überprüfung aller Tabellenzeilen durchgeführt werden. Diejenigen, die nicht mit der Suchanfrage übereinstimmen, sollen ausgerottet werden!!
     for (i = 0; i < tr.length; i++) {
         tr[i].style.display = "none";
-        for(let j=0; j<tr.length; j++){
+        for (let j = 0; j < tr.length; j++) {
             td = tr[i].getElementsByTagName("td")[j];
             if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter.toUpperCase()) > -1)                               {
+                if (td.innerHTML.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
                     tr[i].style.display = "";
                     break;
                 }
@@ -242,15 +261,15 @@ function playlist(id) {
                 playlistlistGlobal[i] = element
                 if (element.id === id) {
                     searchBar.innerHTML = '<h1 id="playlistname">' + element.name +
-                        '<button class="deletebutton" onclick="playPlaylist('+ i +')">' +
+                        '<button class="deletebutton" onclick="playPlaylist(' + i + ')">' +
                         '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
                         '</button></h1>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
-                        const songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' +
-                            toMinSec(song.length) + '</td></tr>';
-                        const newRow = songlist.insertRow(songlist.rows.length);
-                        newRow.innerHTML = songHTML;
+                            const songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' +
+                                toMinSec(song.length) + '</td></tr>';
+                            const newRow = songlist.insertRow(songlist.rows.length);
+                            newRow.innerHTML = songHTML;
                         }
                     )
                 }
@@ -262,51 +281,45 @@ function playlist(id) {
 
 }
 
-function playQueue(pause){
-    if(isPlaying && pause){
-        isPlaying=false
+function playQueue(pause) {
+    if (isPlaying && pause) {
+        isPlaying = false
         pausedtime = countdownconter;
         wasPaused = true;
-    }
-    else {
+    } else {
         isPlaying = true;
-        if (wait.length >= 1){
+        if (wait.length >= 1) {
             var duration = songlistGlobal[wait[0]].length
-            console.log('now playling: '+songlistGlobal[wait[0]].titel)
-            if(!wasPaused){
+            console.log('now playling: ' + songlistGlobal[wait[0]].titel)
+            if (!wasPaused) {
                 countdownconter = duration;
-            }
-            else {
-                countdownconter=pausedtime;
+            } else {
+                countdownconter = pausedtime;
             }
             countDown()
 
-            function countDown(){
-                if(isPlaying && wait.length !== 0){
+            function countDown() {
+                if (isPlaying && wait.length !== 0) {
                     console.log(countdownconter)
                     document.getElementById("actLength").innerText = toMinSec(countdownconter)
                     countdownconter--
-                    if (countdownconter <=0){
+                    if (countdownconter <= 0) {
                         decrementQueue()
                         return;
                     }
-                    setTimeout(countDown, 100)
+                    setTimeout(countDown, 1000)
 
                 }
-                else {
-                    return;
-                }
-
             }
 
             // setTimeout(decrementQueue,duration*1000)  //deletes the current song after songs duration
-            function decrementQueue(){
+            function decrementQueue() {
                 history.push(wait.shift())
                 waitinglist--
-                if (wait.length != 0){
+                if (wait.length !== 0) {
                     actWaitList()
-                    isPlaying=false
-                    wasPaused=false
+                    isPlaying = false
+                    wasPaused = false
                     playQueue()
                 }
                 actWaitList()
@@ -316,30 +329,33 @@ function playQueue(pause){
 
 }
 
-function playPlaylist(playlist){
-    console.log(playlistlistGlobal[playlist].songs)
+function playPlaylist(playlist) {
     clearWait()
-    playlistlistGlobal[playlist].songs.forEach(song=>{
-        console.log(song)
+    playlistlistGlobal[playlist].songs.forEach(song => {
         addToWait(getSongID(song))
     })
     actWaitList()
     playQueue()
 }
 
-function getSongID(song){
-    return songlistGlobal.findIndex(checkSongs)
-
-    function checkSongs(song1){
-        return song === song
+function getSongID(songC) {
+    let ind = -1
+    songlistGlobal.forEach(song => {
+        if (song.titel === songC.titel && song.artist === songC.artist && song.length === songC.length) {
+            ind = songlistGlobal.indexOf(song)
+        }
+    })
+    if (ind >= 0) {
+        return ind;
     }
+    return -1;
 }
 
-function toMinSec(time){
-    let min = Math.floor(time/60)
-    let sec = time%60
-    if (sec < 10){
-        sec = '0'+sec
+function toMinSec(time) {
+    let min = Math.floor(time / 60)
+    let sec = time % 60
+    if (sec < 10) {
+        sec = '0' + sec
     }
     return min + ':' + sec;
 }
