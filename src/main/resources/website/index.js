@@ -245,7 +245,7 @@ function playQueue(){
             history.push(wait.shift())
             waitinglist--
             console.log(wait)
-            if (wait != []){
+            if (wait.length !== 0){
                 actWaitList()
                 playQueue()
             }
@@ -266,6 +266,5 @@ function toMinSec(time){
     if (sec < 10){
         sec = sec +'0'
     }
-    const timeInMinSec = min + ':' + sec;
-    return timeInMinSec
+    return min + ':' + sec;
 }
