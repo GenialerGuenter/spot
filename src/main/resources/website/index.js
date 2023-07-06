@@ -43,7 +43,7 @@ function actWaitList() {
             document.getElementById("actArtist").innerText = songlistGlobal[element].artist
         }else{
             console.log(wait.length)
-            let waitHTML = '<th><button class="songBtn"><div class="waitSong">\n' +
+            let waitHTML = '<th><button class="songBtn" onclick="moveToSong('+ i +')"><div class="waitSong">\n' +
                 '<table class="songTable"><tr><th>' + songlistGlobal[element].titel + '</th>\n' +
                 '<td rowspan="2">' + toMinSec(songlistGlobal[element].length) + '</td></tr>\n' +
                 '<tr><th>' + songlistGlobal[element].artist + '</th>\</tr>\n' +
@@ -55,24 +55,31 @@ function actWaitList() {
                 '</td>\n'
             if (wait.length >= 3) {
                 if (i === 1) {
+                    let from = i
+                    let to = i +1
                     waitHTML += '<td colspan="2">\n' +
-                        '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                        '<button class="deletebutton" onclick="moveSong(' + from + ','+ to +')">' +
                         '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
                         '</button>\n' +
                         '</td>\n'
                 } else if (i === wait.length - 1) {
+                    let from = i
+                    let to = i - 1
                     waitHTML += '<td colspan="2">\n' +
-                        '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                        '<button class="deletebutton" onclick="moveSong(' + from + ','+ to +');">\n' +
                         '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
                         '</button>\n' +
                         '</td>\n'
                 } else {
+                    let from = i
+                    let up = i - 1
+                    let down = i + 1
                     waitHTML += '<td>\n' +
-                        '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                        '<button class="deletebutton" onclick="moveSong(' + from + ','+ down +');">\n' +
                         '<i class="fa-solid fa-arrow-down fa-2xl" style="color: #000000;"></i>\n' +
                         '</button>\n' +
                         '</td>\n' + '<td>\n' +
-                        '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                        '<button class="deletebutton" onclick="moveSong(' + from + ', '+ up +')">' +
                         '<i class="fa-solid fa-arrow-up fa-2xl" style="color: #000000;"></i>\n' +
                         '</button>\n' +
                         '</td>\n'
@@ -89,6 +96,18 @@ function actWaitList() {
         }
         i++
     })
+}
+
+function moveSong(from, to){
+    let temp = wait[from]
+    wait[from] = wait[to]
+    wait[to] = temp
+    actWaitList()
+}
+
+function moveToSong(song){
+    wait.splice(0, song)
+    actWaitList()
 }
 
 /* showDropUp toggles between adding and removing the show class, which is used to hide and show the dropdown content */
