@@ -1,7 +1,9 @@
 package de.adesso.spot.persistence;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table(name = "SONG")
 @Getter
 @Setter
+//@Builder
 public class SongEntity {
 
     @Id
@@ -31,4 +34,7 @@ public class SongEntity {
     @ManyToMany(mappedBy = "playlistSongs")
     private List<PlaylistEntity> playlists;
 
+//    public SongEntity() {
+//
+//    }
 }

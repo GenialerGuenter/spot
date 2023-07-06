@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 public class Song {
 
-    private String titel;
+    private String title;
     private String artist;
     private int length;
 

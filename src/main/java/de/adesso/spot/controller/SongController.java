@@ -16,8 +16,8 @@ class SongController {
 
     private final SongService service;
 
-    @PostMapping()
-    SongEntity postSong(@RequestBody SongEntity newSong){ return service.createNewSong(newSong); }
+//    @PostMapping()
+//    Song postSong(@RequestBody Song newSong){ return service.createNewSong(newSong); }
 
     @GetMapping
     List<Song> getAllSongs() {

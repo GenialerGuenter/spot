@@ -15,12 +15,12 @@ let wasPaused = false;
 getAllSongs()
 
 
-function createSong(titel, artist, length) {
+function createSong(title, artist, length) {
     fetch('http://localhost:8080/api/song', {
         method: "POST",
         body: JSON.stringify({
             id: 1,
-            title: titel,
+            title: title,
             artist: artist,
             length: length
         }),
@@ -56,13 +56,13 @@ function actWaitList() {
     }
     wait.forEach(element => {
         if (i === 0) {
-            document.getElementById("actName").innerText = songlistGlobal[element].titel
+            document.getElementById("actName").innerText = songlistGlobal[element].title
             document.getElementById("actLength").innerText = toMinSec(songlistGlobal[element].length)
             document.getElementById("actArtist").innerText = songlistGlobal[element].artist
         } else {
             console.log(wait.length)
             let waitHTML = '<th><button class="songBtn" onclick="moveToSong(' + i + ')"><div class="waitSong">\n' +
-                '<table class="songTable"><tr><th>' + songlistGlobal[element].titel + '</th>\n' +
+                '<table class="songTable"><tr><th>' + songlistGlobal[element].title + '</th>\n' +
                 '<td rowspan="2">' + toMinSec(songlistGlobal[element].length) + '</td></tr>\n' +
                 '<tr><th>' + songlistGlobal[element].artist + '</th>\</tr>\n' +
                 '</table>\n' +
@@ -182,7 +182,7 @@ function getAllSongs() {
             let i = 0;
             json.forEach(element => {
                 songlistGlobal[i] = element
-                const songHTML = '<tr><td>' + element.titel + '</td><td>' + element.artist + '</td><td>' +
+                const songHTML = '<tr><td>' + element.title + '</td><td>' + element.artist + '</td><td>' +
                     toMinSec(element.length) + '</td><td>' +
                     '<button class="deletebutton" onclick="addToWait(' + i + ');">' +
                     '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
@@ -269,7 +269,7 @@ function playlist(id) {
                         '</button></h1>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
-                            const songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' +
+                            const songHTML = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td>' +
                                 toMinSec(song.length) + '</td></tr>';
                             const newRow = songlist.insertRow(songlist.rows.length);
                             newRow.innerHTML = songHTML;
@@ -296,7 +296,7 @@ function playQueue(pause) {
         isPlaying = true;
         if (wait.length >= 1) {
             var duration = songlistGlobal[wait[0]].length
-            console.log('now playling: ' + songlistGlobal[wait[0]].titel)
+            console.log('now playling: ' + songlistGlobal[wait[0]].title)
             if (!wasPaused) {
                 countdownconter = duration;
             } else {
@@ -347,7 +347,7 @@ function playPlaylist(playlist) {
 function getSongID(songC) {
     let ind = -1
     songlistGlobal.forEach(song => {
-        if (song.titel === songC.titel && song.artist === songC.artist && song.length === songC.length) {
+        if (song.title === songC.title && song.artist === songC.artist && song.length === songC.length) {
             ind = songlistGlobal.indexOf(song)
         }
     })
