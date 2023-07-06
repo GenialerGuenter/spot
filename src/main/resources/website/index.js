@@ -6,6 +6,10 @@ const playlistlistGlobal = [];
 let waitinglist = 0;
 const wait = [];
 const history = [];
+var isPlaying = false;
+var countdownconter; //variable for the live playback
+var pausedtime =100;
+var wasPaused = false;
 
 getAllSongs()
 
@@ -25,6 +29,7 @@ function actWaitList() {
     dropup.innerHTML = ""
     let i = 0
     if(wait.length === 0){
+        isPlaying=false;
         document.getElementById("actName").innerText = "-----"
         document.getElementById("actLength").innerText = "--"
         document.getElementById("actArtist").innerText = "---"
@@ -237,34 +242,50 @@ function playlist(id) {
 }
 
 function playQueue(){
-    let isPlaying;
     if(isPlaying){
         isPlaying=false
+        pausedtime = countdownconter;
+        wasPaused = true;
     }
     else {
         isPlaying = true;
         if (wait.length >= 1){
             var duration = songlistGlobal[wait[0]].length
             console.log('now playling: '+songlistGlobal[wait[0]].titel)
-            let countdownconter = duration
+            if(!wasPaused){
+                countdownconter = duration;
+            }
+            else {
+                countdownconter=pausedtime;
+            }
             countDown()
+
             function countDown(){
-                if(isPlaying){
+                if(isPlaying && wait.length !== 0){
                     console.log(countdownconter)
                     document.getElementById("actLength").innerText = toMinSec(countdownconter)
                     countdownconter--
-                    setTimeout(countDown, 1000)
+                    if (countdownconter <=0){
+                        decrementQueue()
+                        return;
+                    }
+                    setTimeout(countDown, 100)
+
+                }
+                else {
+                    return;
                 }
 
             }
 
-            setTimeout(decrementQueue,duration*1000)  //deletes the current song after songs duration
+            // setTimeout(decrementQueue,duration*1000)  //deletes the current song after songs duration
             function decrementQueue(){
                 history.push(wait.shift())
                 waitinglist--
-                console.log(wait)
                 if (wait.length != 0){
                     actWaitList()
+                    isPlaying=false
+                    wasPaused=false
                     playQueue()
                 }
                 actWaitList()
@@ -283,7 +304,7 @@ function toMinSec(time){
     let min = Math.floor(time/60)
     let sec = time%60
     if (sec < 10){
-        sec = sec +'0'
+        sec = '0'+sec
     }
     return min + ':' + sec;
 }
