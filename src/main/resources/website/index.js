@@ -99,7 +99,10 @@ function moveSong(from, to){
 }
 
 function moveToSong(song){
-    wait.splice(0, song)
+    const addhistory = wait.splice(0, song)
+    addhistory.forEach(song=>{
+        history.push(song)
+    })
     waitinglist = waitinglist - song
     actWaitList()
 }
@@ -111,9 +114,16 @@ function deleteSong(song){
 }
 
 function nextSong(){
-    wait.shift()
+    history.push(wait.shift())
     waitinglist--
     actWaitList()
+}
+
+function previousSong(){
+    if(history.length !== 0) {
+        wait.unshift(history.pop())
+        actWaitList()
+    }
 }
 
 /* showDropUp toggles between adding and removing the show class, which is used to hide and show the dropdown content */
@@ -153,7 +163,7 @@ fetch("http://localhost:8080/api/playlist").then(
 ).then(
     json => {
         json.forEach(element => {
-            var playlistHTML = '<button id="newplaylistbutton" onClick="playlist(' + element.id + ')">' + element.name + '</button>'
+            const playlistHTML = '<button id="newplaylistbutton" onClick="playlist(' + element.id + ')">' + element.name + '</button>';
             playlistlist.innerHTML += playlistHTML;
         })
     }
@@ -166,7 +176,7 @@ if(document.getElementById('searchbar').value != null){
 }
 
 function searchBarSearch() {
-    var input, filter, table, tr, td, i, txtValue;
+    let input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchbar");
     filter = input.value.toUpperCase();
     table = document.getElementById("songtablebody");
@@ -175,7 +185,7 @@ function searchBarSearch() {
     // Es soll eine Überprüfung aller Tabellenzeilen durchgeführt werden. Diejenigen, die nicht mit der Suchanfrage übereinstimmen, sollen ausgerottet werden!!
     for (i = 0; i < tr.length; i++) {
         tr[i].style.display = "none";
-        for(var j=0; j<tr.length; j++){
+        for(let j=0; j<tr.length; j++){
             td = tr[i].getElementsByTagName("td")[j];
             if (td) {
                 if (td.innerHTML.toUpperCase().indexOf(filter.toUpperCase()) > -1)                               {
@@ -199,7 +209,7 @@ function playlist(id) {
 
 
     songlist.className = "song-playlist-table"
-    var i = 0
+    let i = 0;
     fetch(`http://localhost:8080/api/playlist`).then(
         o => {
             return o.json()
@@ -213,9 +223,9 @@ function playlist(id) {
                     searchBar.innerHTML = '<h1 id="playlistname">' + element.name + '</h1><button onclick="playPlaylist()">cock</button>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
-                            var songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' + toMinSec(song.length) + '</td></tr>'
-                            var newRow = songlist.insertRow(songlist.rows.length)
-                            newRow.innerHTML = songHTML;
+                        const songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' + toMinSec(song.length) + '</td></tr>';
+                        const newRow = songlist.insertRow(songlist.rows.length);
+                        newRow.innerHTML = songHTML;
                         }
                     )
                 }
@@ -228,11 +238,11 @@ function playlist(id) {
 
 function playQueue(){
     if (wait.length >= 1){
-        var duration = songlistGlobal[wait[0]].length
+        const duration = songlistGlobal[wait[0]].length;
         console.log(songlistGlobal[wait[0]])
         setTimeout(decrementQueue,duration*1000)
         function decrementQueue(){
-            wait.shift()
+            history.push(wait.shift())
             waitinglist--
             console.log(wait)
             if (wait != []){
@@ -256,6 +266,6 @@ function toMinSec(time){
     if (sec < 10){
         sec = sec +'0'
     }
-    var timeInMinSec = min+':'+sec
+    const timeInMinSec = min + ':' + sec;
     return timeInMinSec
 }
