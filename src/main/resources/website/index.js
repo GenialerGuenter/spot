@@ -138,7 +138,7 @@ function playSong(song){
     clearWait()
     addToWait(song)
     actWaitList()
-    playQueue()
+    playQueue(false)
 }
 
 function clearWait(){
@@ -262,8 +262,8 @@ function playlist(id) {
 
 }
 
-function playQueue(){
-    if(isPlaying){
+function playQueue(pause){
+    if(isPlaying && pause){
         isPlaying=false
         pausedtime = countdownconter;
         wasPaused = true;
