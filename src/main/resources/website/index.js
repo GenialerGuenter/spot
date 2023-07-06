@@ -5,6 +5,7 @@ const songlistGlobal = [];
 const playlistlistGlobal = [];
 let waitinglist = 0;
 const wait = [];
+const history = [];
 
 getAllSongs()
 
@@ -17,14 +18,6 @@ function addToWait(songID) {
     wait[waitinglist] = songID
     waitinglist++
     actWaitList()
-}
-
-function removeFromWait() {
-
-}
-
-function play() {
-
 }
 
 function actWaitList() {
@@ -87,7 +80,7 @@ function actWaitList() {
             }
 
             waitHTML += '<td>' +
-                '<button class="deletebutton" onclick="window.location.href=\'#\';">\n' +
+                '<button class="deletebutton" onclick="deleteSong('+ i +');">\n' +
                 '<i class="fa-solid fa-xmark fa-2xl" style="color: #000000;"></i>\n' +
                 '</button>\n' +
                 '</td>'
@@ -107,6 +100,19 @@ function moveSong(from, to){
 
 function moveToSong(song){
     wait.splice(0, song)
+    waitinglist = waitinglist - song
+    actWaitList()
+}
+
+function deleteSong(song){
+    wait.splice(song, 1)
+    waitinglist--
+    actWaitList()
+}
+
+function nextSong(){
+    wait.shift()
+    waitinglist--
     actWaitList()
 }
 
