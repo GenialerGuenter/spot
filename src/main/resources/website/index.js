@@ -225,6 +225,9 @@ function home() {
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
     getAllSongs()
+    if (screen.width <= 540){
+        toggleSidebar()
+    }
 }
 
 
@@ -259,6 +262,9 @@ function playlist(id) {
 
         }
     )
+    if (screen.width <= 540){
+        toggleSidebar()
+    }
 
 }
 
@@ -346,5 +352,27 @@ function toMinSec(time){
 
 function createPlaylst() {
     alert('Platzhalter für Playlisterstellung')
+    if (screen.width <= 540){
+        toggleSidebar()
+    }
 
 }
+// function openSidebar() {
+//     document.getElementById("sidebardiv").style.display = "block";
+//     document.getElementById('contentId').style.marginLeft= "20%"
+// }
+//
+// function closeSidebar() {
+//     document.getElementById("sidebardiv").style.display = "none";
+//     document.getElementById('contentId').style.marginLeft= "0"
+// }
+function toggleSidebar(){
+    if (document.getElementById("sidebardiv").style.display == "none"){
+        document.getElementById("sidebardiv").style.display = "block";
+        document.getElementById('contentId').style.marginLeft= "20%"
+    }else {
+        document.getElementById("sidebardiv").style.display = "none";
+        document.getElementById('contentId').style.marginLeft= "0"
+    }
+}
+

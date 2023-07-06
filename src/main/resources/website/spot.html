@@ -12,7 +12,7 @@
 </head>
 <body>
 <!-- Die Sidebar -->
-<div class="sidebar">
+<div class="sidebar" id="sidebardiv">
     <!-- Der Homebutton -->
     <button class="homebutton" onclick="home()"> Home</button>
     <!-- Überschrift Playlist -->
@@ -26,8 +26,10 @@
 </div>
 
 <!-- Hauptseite -->
-<div style="margin-left:20%" class="content">
+<div style="margin-left:20%" class="content" id="contentId">
     <!-- Playlistname und Playbutton -->
+<!--    <button id="sidebarbuton"><i class="fa-solid fa-bars"></i></button>-->
+    <i class="fa-solid fa-bars" onclick="toggleSidebar()"></i>
     <div id="searchbardiv">
         <input type="text" id="searchbar" placeholder="search...">
 
