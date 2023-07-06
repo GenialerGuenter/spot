@@ -11,7 +11,7 @@ INSERT INTO SONG VALUES (10006, 'Alexander Alexandrov	', 999, 'Soviet Union Anth
 INSERT INTO SONG VALUES (10007, 'NF', 435, 'HOPE');
 INSERT INTO SONG VALUES (10008, 'NF', 124, 'PANDEMONIUM');
 INSERT INTO SONG VALUES (10009, 'Elton John', 547, 'Im Still Standing');
-INSERT INTO SONG VALUES (10010, 'California Dreaming', 15, 'The Mamas & The Papas');
+INSERT INTO SONG VALUES (10010, 'The Mamas & The Papas', 15, 'California Dreaming');
 
 INSERT INTO PLAYLIST VALUES (10000, 'Playlist 1');
 INSERT INTO PLAYLIST VALUES (10003, 'Playlist 2');
