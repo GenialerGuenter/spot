@@ -290,7 +290,7 @@ function playQueue(pause){
                         decrementQueue()
                         return;
                     }
-                    setTimeout(countDown, 100)
+                    setTimeout(countDown, 1000)
 
                 }
                 else {
@@ -342,4 +342,9 @@ function toMinSec(time){
         sec = '0'+sec
     }
     return min + ':' + sec;
+}
+
+function createPlaylst() {
+    alert('Platzhalter für Playlisterstellung')
+
 }
