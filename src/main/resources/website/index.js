@@ -260,10 +260,10 @@ function playQueue(){
 
             setTimeout(decrementQueue,duration*1000)  //deletes the current song after songs duration
             function decrementQueue(){
-                wait.shift()
+                history.push(wait.shift())
                 waitinglist--
                 console.log(wait)
-                if (wait != []){
+                if (wait.length != 0){
                     actWaitList()
                     playQueue()
                 }
