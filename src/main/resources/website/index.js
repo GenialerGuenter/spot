@@ -119,16 +119,31 @@ function deleteSong(song){
 }
 
 function nextSong(){
-    history.push(wait.shift())
-    waitinglist--
-    actWaitList()
+    if(wait.length >= 1) {
+        history.push(wait.shift())
+        waitinglist--
+        actWaitList()
+    }
 }
 
 function previousSong(){
-    if(history.length !== 0) {
+    if(history.length > 0) {
         wait.unshift(history.pop())
         actWaitList()
     }
+}
+
+function playSong(song){
+    clearWait()
+    addToWait(song)
+    actWaitList()
+    playQueue()
+}
+
+function clearWait(){
+    history.push(wait[0])
+    wait.splice(0, wait.length)
+    waitinglist = 0
 }
 
 /* showDropUp toggles between adding and removing the show class, which is used to hide and show the dropdown content */
@@ -151,6 +166,9 @@ function getAllSongs() {
                     toMinSec(element.length) + '</td><td>' +
                     '<button class="deletebutton" onclick="addToWait(' + i + ');">' +
                     '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
+                    '</button></td><td>' +
+                    '<button class="deletebutton" onclick="playSong('+ i +')">' +
+                    '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
                     '</button></td></tr>';
                 const newRow = songlist.insertRow(songlist.rows.length);
                 newRow.innerHTML = songHTML;
@@ -211,8 +229,6 @@ function home() {
 
 //Verändert die seite zur Playlistanzeige und gibt die songs in der Playlist aus
 function playlist(id) {
-
-
     songlist.className = "song-playlist-table"
     let i = 0;
     fetch(`http://localhost:8080/api/playlist`).then(
@@ -223,17 +239,21 @@ function playlist(id) {
         json => {
             json.forEach(element => {
                 playlistlistGlobal[i] = element
-                i++
                 if (element.id === id) {
-                    searchBar.innerHTML = '<h1 id="playlistname">' + element.name + '</h1><button onclick="playPlaylist()">cock</button>'
+                    searchBar.innerHTML = '<h1 id="playlistname">' + element.name +
+                        '<button class="deletebutton" onclick="playPlaylist('+ i +')">' +
+                        '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
+                        '</button></h1>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
-                        const songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' + toMinSec(song.length) + '</td></tr>';
+                        const songHTML = '<tr><td>' + song.titel + '</td><td>' + song.artist + '</td><td>' +
+                            toMinSec(song.length) + '</td></tr>';
                         const newRow = songlist.insertRow(songlist.rows.length);
                         newRow.innerHTML = songHTML;
                         }
                     )
                 }
+                i++
             })
 
         }
@@ -295,11 +315,25 @@ function playQueue(){
 
 }
 
-function playPlaylist(){
-    addToWait(0)
-    addToWait(1)
+function playPlaylist(playlist){
+    console.log(playlistlistGlobal[playlist].songs)
+    clearWait()
+    playlistlistGlobal[playlist].songs.forEach(song=>{
+        console.log(song)
+        addToWait(getSongID(song))
+    })
+    actWaitList()
     playQueue()
 }
+
+function getSongID(song){
+    return songlistGlobal.findIndex(checkSongs)
+
+    function checkSongs(song1){
+        return song === song
+    }
+}
+
 function toMinSec(time){
     let min = Math.floor(time/60)
     let sec = time%60

@@ -170,6 +170,7 @@ a {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 3;
+    overflow: auto;
 }
 /*Die Änderung die stattfinden soll, wenn auf den dropupbutton gedrückt wird*/
 .show {
