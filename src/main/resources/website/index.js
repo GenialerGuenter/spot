@@ -237,19 +237,38 @@ function playlist(id) {
 }
 
 function playQueue(){
-    if (wait.length >= 1){
-        const duration = songlistGlobal[wait[0]].length;
-        console.log(songlistGlobal[wait[0]])
-        setTimeout(decrementQueue,duration*1000)
-        function decrementQueue(){
-            history.push(wait.shift())
-            waitinglist--
-            console.log(wait)
-            if (wait.length !== 0){
-                actWaitList()
-                playQueue()
+    let isPlaying;
+    if(isPlaying){
+        isPlaying=false
+    }
+    else {
+        isPlaying = true;
+        if (wait.length >= 1){
+            var duration = songlistGlobal[wait[0]].length
+            console.log('now playling: '+songlistGlobal[wait[0]].titel)
+            let countdownconter = duration
+            countDown()
+            function countDown(){
+                if(isPlaying){
+                    console.log(countdownconter)
+                    document.getElementById("actLength").innerText = toMinSec(countdownconter)
+                    countdownconter--
+                    setTimeout(countDown, 1000)
+                }
+
             }
-            actWaitList()
+
+            setTimeout(decrementQueue,duration*1000)  //deletes the current song after songs duration
+            function decrementQueue(){
+                wait.shift()
+                waitinglist--
+                console.log(wait)
+                if (wait != []){
+                    actWaitList()
+                    playQueue()
+                }
+                actWaitList()
+            }
         }
     }
 
