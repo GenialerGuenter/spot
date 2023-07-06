@@ -25,6 +25,7 @@ function addToWait(songID) {
 }
 
 function actWaitList() {
+    wasPaused=false;
     const dropup = document.getElementById("waitList")
     dropup.innerHTML = ""
     let i = 0
