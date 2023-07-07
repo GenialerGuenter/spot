@@ -14,8 +14,8 @@
 <!-- Die Sidebar -->
 <div class="sidebar" id="sidebardiv">
     <!-- Der Homebutton -->
-    <button onclick="home()"> Home</button>
-    <button class="homebutton" onclick="createSongFromButton()">✚ Neuer Song</button>
+    <button onclick="pageSwitch(-1, -1)"> Home</button>
+    <button class="homebutton" onclick="pageSwitch(0)">✚ Neuer Song</button>
     <!-- Überschrift Playlist -->
     <h3 class="playlist-title">Playlists</h3>
 
@@ -27,35 +27,7 @@
 </div>
 
 <!-- Hauptseite -->
-<div style="margin-left:20%" class="content" id="contentId">
-    <!-- Playlistname und Playbutton -->
-<!--    <button id="sidebarbuton"><i class="fa-solid fa-bars"></i></button>-->
-    <i class="fa-solid fa-bars fa-2xl switch" onclick="toggleSidebar()"></i>
-    <div class="searchbar" id="searchbardiv">
-        <input type="text" id="searchbar" placeholder="search...">
-
-    </div>
-<!--    <div>-->
-<!--        <button onclick="">-->
-<!--            Servus-->
-<!--        </button>-->
-<!--    </div>-->
-    <!-- In der Playlist vorhandene Songs -->
-    <div class="songsinplaylist">
-        <table class="song-main-table" id="songListe">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Künstler*in</th>
-                    <th>Dauer</th>
-                </tr>
-            </thead>
-            <tbody id="songtablebody">
-            </tbody>
-
-        </table>
-    </div>
-</div>
+<div style="margin-left:20%" class="content" id="contentId"></div>
 
 <!-- Footer -->
 <div class="footer">
@@ -102,6 +74,5 @@
     <!-- Das Skript der Götter!!!          (Samuel und Simon) -->
     <script type="text/javascript" src="index.js"></script>
 </div>
-
 </body>
 </html>

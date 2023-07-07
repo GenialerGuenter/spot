@@ -1,20 +1,38 @@
 const playlistlist = document.getElementById('sidebar');
-const songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
-const searchBar = document.getElementById('searchbardiv');
+let songlist;
+let searchBar;
 const songlistGlobal = [];
 const playlistlistGlobal = [];
 let waitinglist = 0;
 const wait = [];
 const history = [];
 let isPlaying = false;
-var countdownconter = 10; //variable for the live playback
+let countdownconter = 10; //variable for the live playback
 let pausedtime = 100;
 let wasPaused = false;
 let searchbarOn = true;
 let playlistSearch = -1;
 
-getAllSongs()
+content()
 showPlaylists()
+getAllSongs()
+
+function pageSwitch(page, id) {
+    if (page === -1) {
+        content()
+        home()
+    } else if (page === 0) {
+        createSongFromButton()
+    } else if (page === 1) {
+        content()
+        playlist(id)
+    }
+}
+
+// function newSong(){
+//     document.getElementById('contentId').innerHTML = ""
+//     let contentHTML = '<p>Name:</p><input>'
+// }
 
 function createSong(title, artist, length) {
     fetch('http://localhost:8080/api/song', {
@@ -33,14 +51,14 @@ function createSong(title, artist, length) {
         .then((json) => console.log(json))
 }
 
-function createSongFromButton(){
+function createSongFromButton() {
     let title = prompt('Wie heißt dein Song?')
     let artist = prompt('Wer bist du?')
     let duration = prompt('Wie lang ist dein Song')
 
-    createSong(title,artist,duration)
+    createSong(title, artist, duration)
 
-    setTimeout(getAllSongs,69)
+    setTimeout(getAllSongs, 69)
 }
 
 document.getElementById("myBtn").onclick = function () {
@@ -198,7 +216,7 @@ function getAllSongs() {
             json.forEach(element => {
                 songlistGlobal[i] = element
                 let songHTML;
-                if(playlistSearch >= 0){
+                if (playlistSearch >= 0) {
                     songHTML = '<tr><td>' + element.title + '</td><td>' + element.artist + '</td><td>' +
                         toMinSec(element.length) + '</td><td>' +
                         '<button class="deletebutton" onclick="addSongToPlaylist(' + i + ', ' + playlistSearch
@@ -206,7 +224,7 @@ function getAllSongs() {
                         '<i class="fa-solid fa-circle-plus fa-2xl" style="color: #000000;"></i>' +
                         '</button></td></tr>';
 
-                }else {
+                } else {
                     songHTML = '<tr><td>' + element.title + '</td><td>' + element.artist + '</td><td>' +
                         toMinSec(element.length) + '</td><td>' +
                         '<button class="deletebutton" onclick="addToWait(' + i + ');">' +
@@ -222,6 +240,7 @@ function getAllSongs() {
             })
         }
     )
+    console.log(3)
 }
 
 function showPlaylists() {
@@ -235,20 +254,21 @@ function showPlaylists() {
             playlistlist.innerHTML = ""
             json.forEach(element => {
                 playlistlistGlobal[i] = element
-                const playlistHTML = '<button id="newplaylistbutton" onClick="playlist(' + element.id + ')">' +
+                const playlistHTML = '<button id="newplaylistbutton" onClick="pageSwitch(1, ' + element.id + ')">' +
                     '<table><tr><td>'
                     + element.name +
                     '</td><th>' +
-                    '<button onclick="deletePlaylist('+ element.id +')" class="deletebutton">' +
+                    '<button onclick="deletePlaylist(' + element.id + ')" class="deletebutton">' +
                     '<i class="fa-regular fa-trash-can" ></i>' +
                     '</button>' +
                     '</th></tr></table>'
-                    '</button>';
+                '</button>';
                 playlistlist.innerHTML += playlistHTML;
                 i++
             })
         }
     )
+    console.log(2)
 }
 
 //Funktion um die Suchleiste suchen zu lassen
@@ -281,19 +301,42 @@ function searchBarSearch() {
     }
 }
 
+function content() {
+    document.getElementById('contentId').innerHTML = '<i class="fa-solid fa-bars fa-2xl switch" onclick="toggleSidebar()"></i>' +
+        '<div class="searchbar" id="searchbardiv">\n' +
+        '<input type="text" id="searchbar" placeholder="search...">\n' +
+        '</div>\n' +
+        '<div class="songsinplaylist">\n' +
+        '<table class="song-main-table" id="songListe">\n' +
+        '<thead>\n' +
+        '<tr>\n' +
+        '<th>Name</th>\n' +
+        '<th>Künstler*in</th>\n' +
+        '<th>Dauer</th>\n' +
+        '</tr>\n' +
+        '</thead>\n' +
+        '<tbody id="songtablebody">\n' +
+        '</tbody>\n' +
+        '</table>\n' +
+        '</div>'
+    songlist = document.getElementById('songListe').getElementsByTagName('tbody')[0];
+    searchBar = document.getElementById('searchbardiv');
+    console.log(1)
+}
+
 function home() {
+    console.log(4)
     showPlaylists()
     searchbarOn = true;
     playlistSearch = -1;
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
     getAllSongs()
-    if (screen.width <= 540) {
+    if (document.width <= 540) {
         toggleSidebar()
     }
 
 }
-
 
 //Verändert die seite zur Playlistanzeige und gibt die songs in der Playlist aus
 function playlist(id) {
@@ -309,7 +352,7 @@ function playlist(id) {
         json => {
             json.forEach(element => {
                 if (element.id === id) {
-                    document.getElementById("searchbardiv").className="playlist"
+                    document.getElementById("searchbardiv").className = "playlist"
                     searchBar.innerHTML = '<h1 id="playlistname">' + element.name +
                         '<button class="deletebutton playlist" onclick="playPlaylist(' + i + ')">' +
                         '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
@@ -317,14 +360,14 @@ function playlist(id) {
                         '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
                         '</button></h1>' +
                         '<div>' +
-                        '<button class="newSongs" onclick="newSongs('+id+')">' +
+                        '<button class="newSongs" onclick="newSongs(' + id + ')">' +
                         'Songs hinzufügen' +
                         '</button>'
-                        '</div>'
+                    '</div>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
                             const songHTML = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td>' +
-                                toMinSec(song.length) + '</td><td><button onclick="deleteFromPlaylist('+song.id+', '+element.id+')"><i class="fa-regular fa-trash-can"></i></button></td></tr>';
+                                toMinSec(song.length) + '</td><td><button onclick="deleteFromPlaylist(' + song.id + ', ' + element.id + ')"><i class="fa-regular fa-trash-can"></i></button></td></tr>';
                             const newRow = songlist.insertRow(songlist.rows.length);
                             newRow.innerHTML = songHTML;
                         }
@@ -338,7 +381,6 @@ function playlist(id) {
     if (screen.width <= 540) {
         toggleSidebar()
     }
-
 }
 
 function playQueue(pause) {
@@ -362,10 +404,10 @@ function playQueue(pause) {
             function countDown() {
                 if (isPlaying && wait.length !== 0) {
 
-                    if(!isNaN(countdownconter)){                       //Checks if countdowncounter is a Number  if yes --> decrement and show time in Min/Sec
+                    if (!isNaN(countdownconter)) {                       //Checks if countdowncounter is a Number  if yes --> decrement and show time in Min/Sec
                         countdownconter--
                         document.getElementById("actLength").innerText = toMinSec(countdownconter)
-                    }else {                                                                                    // if not --> show countdowntimer anyways because I want to be able to just change the countdown to whatever
+                    } else {                                                                                    // if not --> show countdowntimer anyways because I want to be able to just change the countdown to whatever
                         document.getElementById("actLength").innerText = countdownconter
                     }
                     console.log(countdownconter)
@@ -437,7 +479,7 @@ function toMinSec(time) {
 
 function createPlaylist() {
     let newPlaylistName = prompt('Wie möchtest du deine Playlist benennen?')
-    if (newPlaylistName.length <= 1400){
+    if (newPlaylistName.length <= 1400) {
         fetch('http://localhost:8080/api/playlist', {
             method: "POST",
             body: JSON.stringify({
@@ -450,7 +492,7 @@ function createPlaylist() {
             .then((response) => response.json())
             .then((json) => console.log(json))
         setTimeout(showPlaylists, 60)
-    }else{
+    } else {
         alert('too long :D')
     }
 
@@ -488,7 +530,7 @@ function toggleSidebar() {
     }
 }
 
-function newSongs(playlistId){
+function newSongs(playlistId) {
     searchbarOn = true;
     playlistSearch = playlistId;
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
@@ -499,8 +541,8 @@ function newSongs(playlistId){
     }
 }
 
-function deletePlaylist(pId){
-    if (confirm('Bist du dir sicher?')){
+function deletePlaylist(pId) {
+    if (confirm('Bist du dir sicher?')) {
         fetch('http://localhost:8080/api/playlist/' + pId + '/delete-playlist', {
             method: "PUT",
             headers: {
@@ -511,13 +553,14 @@ function deletePlaylist(pId){
             .then((json) => console.log(json))
     }
     setTimeout(reloadPlaylist, 100)
-    function reloadPlaylist(){
+
+    function reloadPlaylist() {
         home()
     }
 }
 
-function deleteFromPlaylist(songId, pId){
-    if (confirm('Bist du dir sicher?')){
+function deleteFromPlaylist(songId, pId) {
+    if (confirm('Bist du dir sicher?')) {
         fetch('http://localhost:8080/api/playlist/' + pId + '/delete-song', {
             method: "PUT",
             body: songId,
@@ -529,7 +572,8 @@ function deleteFromPlaylist(songId, pId){
             .then((json) => console.log(json))
     }
     setTimeout(reloadPlaylist, 100)
-    function reloadPlaylist(){
+
+    function reloadPlaylist() {
         playlist(pId)
     }
 }

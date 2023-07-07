@@ -2,7 +2,6 @@ body{
     font-family: Tahoma;
 }
 
-
 .playlist{
     margin-left: 30px;
 }
@@ -170,8 +169,6 @@ a {
     z-index: 2;
 }
 
-
-
 /*Der Style für die Buttons Play, Skip und Back*/
 
 .playbutton{
@@ -197,8 +194,6 @@ a {
     cursor: pointer;
 }
 
-
-
 /*Die Styles für den dropupbutton sowie den dropup Inhalt*/
 
 .dropup {
@@ -222,8 +217,6 @@ a {
 .show {
     display:block;
 }
-
-
 
 /*Die Styles für die verschiedenen Songarten*/
 
