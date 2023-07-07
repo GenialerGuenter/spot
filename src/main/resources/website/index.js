@@ -11,7 +11,7 @@ var countdownconter = 10; //variable for the live playback
 let pausedtime = 100;
 let wasPaused = false;
 let searchbarOn = true;
-const songListPlaylist = [];
+let playlistSearch = -1;
 
 getAllSongs()
 showPlaylists()
@@ -187,14 +187,25 @@ function getAllSongs() {
             let i = 0;
             json.forEach(element => {
                 songlistGlobal[i] = element
-                const songHTML = '<tr><td>' + element.title + '</td><td>' + element.artist + '</td><td>' +
-                    toMinSec(element.length) + '</td><td>' +
-                    '<button class="deletebutton" onclick="addToWait(' + i + ');">' +
-                    '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
-                    '</button></td><td>' +
-                    '<button class="deletebutton" onclick="playSong(' + i + ')">' +
-                    '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
-                    '</button></td></tr>';
+                let songHTML;
+                if(playlistSearch >= 0){
+                    songHTML = '<tr><td>' + element.title + '</td><td>' + element.artist + '</td><td>' +
+                        toMinSec(element.length) + '</td><td>' +
+                        '<button class="deletebutton" onclick="addSongToPlaylist(' + i + ', ' + playlistSearch
+                        + ');">' +
+                        '<i class="fa-solid fa-circle-plus fa-2xl" style="color: #000000;"></i>' +
+                        '</button></td></tr>';
+
+                }else {
+                    songHTML = '<tr><td>' + element.title + '</td><td>' + element.artist + '</td><td>' +
+                        toMinSec(element.length) + '</td><td>' +
+                        '<button class="deletebutton" onclick="addToWait(' + i + ');">' +
+                        '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
+                        '</button></td><td>' +
+                        '<button class="deletebutton" onclick="playSong(' + i + ')">' +
+                        '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
+                        '</button></td></tr>';
+                }
                 const newRow = songlist.insertRow(songlist.rows.length);
                 newRow.innerHTML = songHTML;
                 i++
@@ -214,7 +225,15 @@ function showPlaylists() {
             playlistlist.innerHTML = ""
             json.forEach(element => {
                 playlistlistGlobal[i] = element
-                const playlistHTML = '<button id="newplaylistbutton" onClick="playlist(' + element.id + ')">' + element.name + '</button>';
+                const playlistHTML = '<button id="newplaylistbutton" onClick="playlist(' + element.id + ')">' +
+                    '<table><tr><td>'
+                    + element.name +
+                    '</td><th>' +
+                    '<button onclick="deletePlaylist('+ i +')" class="deletebutton">' +
+                    '<i class="fa-solid fa-xmark fa-2xl" style="color: #000000;"></i>' +
+                    '</button>' +
+                    '</th></tr></table>'
+                    '</button>';
                 playlistlist.innerHTML += playlistHTML;
                 i++
             })
@@ -254,6 +273,7 @@ function searchBarSearch() {
 
 function home() {
     searchbarOn = true;
+    playlistSearch = -1;
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
     getAllSongs()
@@ -282,7 +302,12 @@ function playlist(id) {
                         '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
                         '</button><button class="deletebutton playlist" onclick="queuePlaylist(' + i + ')">' +
                         '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
-                        '</button></h1>'
+                        '</button></h1>' +
+                        '<div>' +
+                        '<button onclick="newSongs('+id+')">' +
+                        'Songs hinzufügen' +
+                        '</button>'
+                        '</div>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
                             const songHTML = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td>' +
@@ -413,8 +438,9 @@ function createPlaylist() {
 
 function addSongToPlaylist(songID, playlistID) {
     let song = songlistGlobal[songID];
-    let editPlaylist = playlistlistGlobal[playlistID]
-    let pId = editPlaylist.id
+    console.log(playlistID)
+    // let playlist = playlistlistGlobal[playlistID]
+    let pId = playlistID
     fetch('http://localhost:8080/api/playlist/' + pId + '/add-song', {
         method: "PUT",
         body: song.id,
@@ -442,6 +468,17 @@ function toggleSidebar() {
     } else {
         document.getElementById("sidebardiv").style.display = "none";
         document.getElementById('contentId').style.marginLeft = "0"
+    }
+}
+
+function newSongs(playlistId){
+    searchbarOn = true;
+    playlistSearch = playlistId;
+    searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
+    songlist.className = "song-main-table"
+    getAllSongs()
+    if (screen.width <= 540) {
+        toggleSidebar()
     }
 }
 

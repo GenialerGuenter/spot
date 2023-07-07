@@ -44,6 +44,22 @@ ul{
     background-color: transparent;
     margin-right: 8%;
 }
+
+.sidebar td{
+    width: 150%
+}
+
+.sidebar .deletebutton{
+    width: 100%;
+    float: right;
+    padding: 0;
+    font-size: 25px;
+    border-radius: 0;
+    border: 0;
+    background-color: transparent;
+    margin-right: 0;
+}
+
 #newplaylistbutton{
     margin-bottom: 4%;
 }
