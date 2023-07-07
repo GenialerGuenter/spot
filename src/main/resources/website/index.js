@@ -383,6 +383,7 @@ function playQueue(pause) {
 }
 
 function playPlaylist(playlist) {
+    showPlaylists()
     clearWait()
     playlistlistGlobal[playlist].songs.forEach(song => {
         addToWait(getSongID(song))
@@ -392,6 +393,7 @@ function playPlaylist(playlist) {
 }
 
 function queuePlaylist(playlist) {
+    showPlaylists()
     playlistlistGlobal[playlist].songs.forEach(song => {
         addToWait(getSongID(song))
     })
@@ -441,11 +443,8 @@ function createPlaylist() {
 
 }
 
-function addSongToPlaylist(songID, playlistID) {
+function addSongToPlaylist(songID, pId) {
     let song = songlistGlobal[songID];
-    console.log(playlistID)
-    // let playlist = playlistlistGlobal[playlistID]
-    let pId = playlistID
     fetch('http://localhost:8080/api/playlist/' + pId + '/add-song', {
         method: "PUT",
         body: song.id,
@@ -487,6 +486,10 @@ function newSongs(playlistId){
     }
 }
 
+function actPlaylist(){
+
+}
+
 function playlistScreen() {
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
@@ -494,8 +497,20 @@ function playlistScreen() {
 
 }
 
-function deleteFromPlaylist(songId, playlistId){
+function deleteFromPlaylist(songId, pId){
     if (confirm('Bist du dir sicher?')){
-        console.log('delete: Song: '+songId+', Playlist: '+playlistId)
+        fetch('http://localhost:8080/api/playlist/' + pId + '/delete-song', {
+            method: "PUT",
+            body: songId,
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json))
+    }
+    setTimeout(reloadPlaylist, 100)
+    function reloadPlaylist(){
+        playlist(pId)
     }
 }

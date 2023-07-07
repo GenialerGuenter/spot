@@ -44,4 +44,16 @@ public class PlaylistEntity {
         playlistSongs.add(song);
         return this;
     }
+
+    public PlaylistEntity deleteSong(SongEntity song){
+        if(playlistSongs != null){
+            for(int i = 0; i < playlistSongs.size(); i++){
+                if(playlistSongs.get(i) == song){
+                    playlistSongs.remove(i);
+                    break;
+                }
+            }
+        }
+        return this;
+    }
 }
