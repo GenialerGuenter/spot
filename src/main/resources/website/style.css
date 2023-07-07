@@ -46,6 +46,14 @@ ul{
     margin-right: 8%;
 }
 
+.homebutton{
+    margin-top: 8%;
+}
+
+.switch{
+    margin-top: 2%;
+}
+
 .newSongs{
     width: 30%;
     padding: 10px 16px 10px 10px;
