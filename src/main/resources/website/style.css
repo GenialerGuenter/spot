@@ -83,11 +83,16 @@ a {
 
 /*Der Style für die Playlistüberschrift und den Playbutton*/
 
-#searchbardiv{
+.searchbar{
     padding-left: 100px;
     padding-top: 1%;
     position: fixed;
+}
 
+.playlist{
+    padding-left: 100px;
+    padding-top: 1%;
+    position: relative;
 }
 
 /* Styling der Suchleiste*/
