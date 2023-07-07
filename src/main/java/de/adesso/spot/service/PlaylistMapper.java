@@ -20,8 +20,9 @@ class PlaylistMapper {
 
     static PlaylistEntity toEntity(Playlist playlist) {
         PlaylistEntity newEntity = new PlaylistEntity();
+        newEntity.setId(playlist.getId());
         newEntity.setName(playlist.getName());
-        newEntity.setPlaylistSongs(new ArrayList<SongEntity>());
+        newEntity.setPlaylistSongs(new ArrayList<>());
         return newEntity;
     }
 }

@@ -11,7 +11,6 @@ let countdownconter; //variable for the live playback
 let pausedtime = 100;
 let wasPaused = false;
 
-// createSong('Freebird', 'unbekannt', 500)
 getAllSongs()
 showPlaylists()
 
@@ -203,6 +202,7 @@ function getAllSongs() {
 }
 
 function showPlaylists() {
+    let i = 0
     fetch("http://localhost:8080/api/playlist").then(
         o => {
             return o.json()
@@ -211,8 +211,10 @@ function showPlaylists() {
         json => {
             playlistlist.innerHTML = ""
             json.forEach(element => {
+                playlistlistGlobal[i] = element
                 const playlistHTML = '<button id="newplaylistbutton" onClick="playlist(' + element.id + ')">' + element.name + '</button>';
                 playlistlist.innerHTML += playlistHTML;
+                i++
             })
         }
     )
@@ -266,7 +268,6 @@ function playlist(id) {
     ).then(
         json => {
             json.forEach(element => {
-                playlistlistGlobal[i] = element
                 if (element.id === id) {
                     searchBar.innerHTML = '<h1 id="playlistname">' + element.name +
                         '<button class="deletebutton playlist" onclick="playPlaylist(' + i + ')">' +
@@ -385,8 +386,7 @@ function createPlaylist() {
     fetch('http://localhost:8080/api/playlist', {
         method: "POST",
         body: JSON.stringify({
-            name: "Neue Playlist",
-            // songs: [songlistGlobal[0]]
+            name: "Neue Playlist"
         }),
         headers:{
             "Content-type":"application/json; charset=UTF-8"
@@ -396,6 +396,22 @@ function createPlaylist() {
         .then((json) => console.log(json))
     setTimeout(showPlaylists, 50)
 }
+
+function addSongToPlaylist(songID, playlistID) {
+    let song = songlistGlobal[songID];
+    let playlist = playlistlistGlobal[playlistID]
+    let pId = playlist.id
+    fetch('http://localhost:8080/api/playlist/' + pId + '/add-song', {
+        method: "PUT",
+        body: song.id,
+        headers:{
+            "Content-type":"application/json; charset=UTF-8"
+        }
+    })
+        .then((response) => response.json())
+        .then((json) => console.log(json))
+}
+
 // function openSidebar() {
 //     document.getElementById("sidebardiv").style.display = "block";
 //     document.getElementById('contentId').style.marginLeft= "20%"

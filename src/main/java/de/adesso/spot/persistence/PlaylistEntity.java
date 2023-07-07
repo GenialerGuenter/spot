@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.AUTO;
@@ -36,4 +37,11 @@ public class PlaylistEntity {
     @Column(name = "NAME", length = 1000, nullable = false)
     private String name;
 
+    public PlaylistEntity addSong(SongEntity song){
+        if(playlistSongs == null){
+            playlistSongs = new ArrayList<>();
+        }
+        playlistSongs.add(song);
+        return this;
+    }
 }

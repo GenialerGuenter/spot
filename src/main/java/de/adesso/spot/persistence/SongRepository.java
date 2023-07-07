@@ -5,5 +5,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SongRepository extends JpaRepository<SongEntity, Long> {
-    boolean existsSongEntityByArtistAndTitleAndLength(String artist, String title, Integer length);
 }
