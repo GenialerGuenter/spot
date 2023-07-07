@@ -21,6 +21,7 @@ body{
     padding-top: 1%;
     padding-left: 1.5%;
     padding-bottom: 300px;
+    bottom: auto;
     /*border-right: 2px solid #bebebe;*/
     box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.48),0 2px 10px 0 rgba(0,0,0,0.12)
 }
@@ -314,6 +315,7 @@ a {
     .sidebar button{
         font-size: 25px;
         padding: 5px;
+
     }
     .sidebar h3{
         font-size: 26px;
