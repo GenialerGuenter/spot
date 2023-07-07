@@ -143,6 +143,8 @@ function nextSong() {
         history.push(wait.shift())
         waitinglist--
         actWaitList()
+        countdownconter = songlistGlobal[wait[0]].length;
+        playQueue()
     }
 }
 
@@ -150,6 +152,8 @@ function previousSong() {
     if (history.length > 0) {
         wait.unshift(history.pop())
         actWaitList()
+        countdownconter = songlistGlobal[wait[0]].length -1;
+        playQueue()
     }
 }
 
