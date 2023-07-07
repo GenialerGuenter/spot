@@ -66,6 +66,9 @@ ul{
 .sidebar td{
     width: 150%
 }
+.sidebar i {
+    color: #e1e1e1;
+}
 
 .sidebar .deletebutton{
     width: 100%;
@@ -92,6 +95,9 @@ a {
 .sidebar li:hover, .sidebar button:hover{
     background-color: #acacac;
     color: white;
+}
+.sidebar i:hover{
+    color: red;
 }
 
 .content{

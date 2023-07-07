@@ -240,7 +240,7 @@ function showPlaylists() {
                     + element.name +
                     '</td><th>' +
                     '<button onclick="deletePlaylist('+ element.id +')" class="deletebutton">' +
-                    '<i class="fa-solid fa-xmark fa-2xl" style="color: #000000;"></i>' +
+                    '<i class="fa-regular fa-trash-can" ></i>' +
                     '</button>' +
                     '</th></tr></table>'
                     '</button>';
