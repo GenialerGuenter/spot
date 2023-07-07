@@ -424,7 +424,7 @@ function toMinSec(time) {
 
 function createPlaylist() {
     let newPlaylistName = prompt('Wie möchtest du deine Playlist benennen?')
-    if (newPlaylistName.length <= 14){
+    if (newPlaylistName.length <= 1400){
         fetch('http://localhost:8080/api/playlist', {
             method: "POST",
             body: JSON.stringify({
