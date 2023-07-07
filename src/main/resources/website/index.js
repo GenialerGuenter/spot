@@ -33,6 +33,16 @@ function createSong(title, artist, length) {
         .then((json) => console.log(json))
 }
 
+function createSongFromButton(){
+    let title = prompt('Wie heißt dein Song?')
+    let artist = prompt('Wer bist du?')
+    let duration = prompt('Wie lang ist dein Song')
+
+    createSong(title,artist,duration)
+
+    setTimeout(getAllSongs,69)
+}
+
 document.getElementById("myBtn").onclick = function () {
     showDropup()
 };
