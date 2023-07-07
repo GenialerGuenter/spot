@@ -264,8 +264,10 @@ function playlist(id) {
                 playlistlistGlobal[i] = element
                 if (element.id === id) {
                     searchBar.innerHTML = '<h1 id="playlistname">' + element.name +
-                        '<button class="deletebutton" onclick="playPlaylist(' + i + ')">' +
+                        '<button class="deletebutton playlist" onclick="playPlaylist(' + i + ')">' +
                         '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
+                        '</button><button class="deletebutton playlist" onclick="queuePlaylist(' + i + ')">' +
+                        '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
                         '</button></h1>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
@@ -288,11 +290,12 @@ function playlist(id) {
 }
 
 function playQueue(pause) {
-    if (isPlaying && pause) {
+    if (isPlaying && !pause){
+    } else if(isPlaying && pause) {
         isPlaying = false
         pausedtime = countdownconter;
         wasPaused = true;
-    } else {
+    }else {
         isPlaying = true;
         if (wait.length >= 1) {
             var duration = songlistGlobal[wait[0]].length
@@ -342,6 +345,13 @@ function playPlaylist(playlist) {
     })
     actWaitList()
     playQueue()
+}
+
+function queuePlaylist(playlist){
+    playlistlistGlobal[playlist].songs.forEach(song => {
+        addToWait(getSongID(song))
+    })
+    actWaitList()
 }
 
 function getSongID(songC) {

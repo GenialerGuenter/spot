@@ -3,6 +3,10 @@ body{
 }
 
 
+.playlist{
+    margin-left: 30px;
+}
+
 /*Der Style für die Sidebar und alles dort enthaltene*/
 
 .sidebar{
@@ -19,7 +23,6 @@ body{
     padding-bottom: 300px;
     /*border-right: 2px solid #bebebe;*/
     box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.48),0 2px 10px 0 rgba(0,0,0,0.12)
-
 }
 ul{
     padding: 0 0 100px;
