@@ -7,12 +7,14 @@ import de.adesso.spot.persistence.SongEntity;
 import de.adesso.spot.persistence.SongRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class PlaylistService {
 
     private final PlaylistRepository playlistRepository;
@@ -35,6 +37,17 @@ public class PlaylistService {
         playlist.deleteSong(song);
 
         playlistRepository.save(playlist);
+        return PlaylistMapper.toPlaylist(playlist);
+    }
+
+    public Playlist deletePlaylist(Long playlistId){
+        Optional<PlaylistEntity> playlistEntity = playlistRepository.findById(playlistId);
+        if (playlistEntity.isEmpty()) {
+            throw new RuntimeException();
+        }
+
+        PlaylistEntity playlist = playlistEntity.get();
+        playlistRepository.delete(playlist);
         return PlaylistMapper.toPlaylist(playlist);
     }
 
@@ -63,6 +76,7 @@ public class PlaylistService {
         return PlaylistMapper.toPlaylist(playlistRepository.save(PlaylistMapper.toEntity(newPlaylist)));
     }
 
+    @Transactional(readOnly = true)
     public List<Playlist> getAllPlaylists(){
         return playlistRepository.findAll()
                 .stream()

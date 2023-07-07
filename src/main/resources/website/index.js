@@ -239,7 +239,7 @@ function showPlaylists() {
                     '<table><tr><td>'
                     + element.name +
                     '</td><th>' +
-                    '<button onclick="deletePlaylist('+ i +')" class="deletebutton">' +
+                    '<button onclick="deletePlaylist('+ element.id +')" class="deletebutton">' +
                     '<i class="fa-solid fa-xmark fa-2xl" style="color: #000000;"></i>' +
                     '</button>' +
                     '</th></tr></table>'
@@ -282,6 +282,7 @@ function searchBarSearch() {
 }
 
 function home() {
+    showPlaylists()
     searchbarOn = true;
     playlistSearch = -1;
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
@@ -315,7 +316,7 @@ function playlist(id) {
                         '<i class="fa-solid fa-arrows-turn-right fa-flip-vertical fa-2xl" style="color: #000000;"></i>' +
                         '</button></h1>' +
                         '<div>' +
-                        '<button onclick="newSongs('+id+')">' +
+                        '<button class="newSongs" onclick="newSongs('+id+')">' +
                         'Songs hinzufügen' +
                         '</button>'
                         '</div>'
@@ -497,15 +498,21 @@ function newSongs(playlistId){
     }
 }
 
-function actPlaylist(){
-
-}
-
-function playlistScreen() {
-    searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
-    songlist.className = "song-main-table"
-    getAllSongs()
-
+function deletePlaylist(pId){
+    if (confirm('Bist du dir sicher?')){
+        fetch('http://localhost:8080/api/playlist/' + pId + '/delete-playlist', {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json))
+    }
+    setTimeout(reloadPlaylist, 100)
+    function reloadPlaylist(){
+        home()
+    }
 }
 
 function deleteFromPlaylist(songId, pId){

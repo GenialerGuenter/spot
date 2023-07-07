@@ -46,6 +46,15 @@ ul{
     margin-right: 8%;
 }
 
+.newSongs{
+    width: 30%;
+    padding: 10px 16px 10px 10px;
+    font-size: 25px;
+    border-radius: 10px;
+    border: 3px solid rgb(155, 152, 152);
+    background-color: transparent;
+}
+
 .sidebar td{
     width: 150%
 }
@@ -320,7 +329,6 @@ a {
     .sidebar button{
         font-size: 25px;
         padding: 5px;
-
     }
     .sidebar h3{
         font-size: 26px;
