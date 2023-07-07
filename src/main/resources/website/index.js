@@ -152,7 +152,7 @@ function previousSong() {
     if (history.length > 0) {
         wait.unshift(history.pop())
         actWaitList()
-        countdownconter = songlistGlobal[wait[0]].length -1;
+        countdownconter = songlistGlobal[wait[0]].length;
         playQueue()
     }
 }
@@ -315,9 +315,10 @@ function playQueue(pause) {
             function countDown() {
                 if (isPlaying && wait.length !== 0) {
                     console.log(countdownconter)
-                    document.getElementById("actLength").innerText = toMinSec(countdownconter)
                     countdownconter--
-                    if (countdownconter <= 0) {
+                    document.getElementById("actLength").innerText = toMinSec(countdownconter)
+
+                    if (countdownconter < 0 ) {
                         decrementQueue()
                         return;
                     }
@@ -415,3 +416,12 @@ function toggleSidebar(){
     }
 }
 
+
+
+
+function playlistScreen(){
+    searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
+    songlist.className = "song-main-table"
+    getAllSongs()
+
+}
