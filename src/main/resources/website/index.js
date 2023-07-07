@@ -10,6 +10,7 @@ let isPlaying = false;
 let countdownconter; //variable for the live playback
 let pausedtime = 100;
 let wasPaused = false;
+let searchbarOn = true;
 
 getAllSongs()
 showPlaylists()
@@ -23,8 +24,8 @@ function createSong(title, artist, length) {
             artist: artist,
             length: length
         }),
-        headers:{
-            "Content-type":"application/json; charset=UTF-8"
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
         }
     })
         .then((response) => response.json())
@@ -221,26 +222,29 @@ function showPlaylists() {
 }
 
 //Funktion um die Suchleiste suchen zu lassen
+
 if (document.getElementById('searchbar').value != null) {
     setInterval(searchBarSearch, 500)
 }
 
 function searchBarSearch() {
-    let input, filter, table, tr, td, i;
-    input = document.getElementById("searchbar");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("songtablebody");
-    tr = table.getElementsByTagName("tr");
+    if (searchbarOn) {
+        let input, filter, table, tr, td, i;
+        input = document.getElementById("searchbar");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("songtablebody");
+        tr = table.getElementsByTagName("tr");
 
-    // Es soll eine Überprüfung aller Tabellenzeilen durchgeführt werden. Diejenigen, die nicht mit der Suchanfrage übereinstimmen, sollen ausgerottet werden!!
-    for (i = 0; i < tr.length; i++) {
-        tr[i].style.display = "none";
-        for (let j = 0; j < tr.length; j++) {
-            td = tr[i].getElementsByTagName("td")[j];
-            if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
-                    tr[i].style.display = "";
-                    break;
+        // Es soll eine Überprüfung aller Tabellenzeilen durchgeführt werden. Diejenigen, die nicht mit der Suchanfrage übereinstimmen, sollen ausgerottet werden!!
+        for (i = 0; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            for (let j = 0; j < tr.length; j++) {
+                td = tr[i].getElementsByTagName("td")[j];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    }
                 }
             }
         }
@@ -248,10 +252,11 @@ function searchBarSearch() {
 }
 
 function home() {
+    searchbarOn = true;
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
     getAllSongs()
-    if (screen.width <= 540){
+    if (screen.width <= 540) {
         toggleSidebar()
     }
 }
@@ -261,6 +266,7 @@ function home() {
 function playlist(id) {
     songlist.className = "song-playlist-table"
     let i = 0;
+    searchbarOn = false;
     fetch(`http://localhost:8080/api/playlist`).then(
         o => {
             return o.json()
@@ -289,19 +295,19 @@ function playlist(id) {
 
         }
     )
-    if (screen.width <= 540){
+    if (screen.width <= 540) {
         toggleSidebar()
     }
 
 }
 
 function playQueue(pause) {
-    if (isPlaying && !pause){
-    } else if(isPlaying && pause) {
+    if (isPlaying && !pause) {
+    } else if (isPlaying && pause) {
         isPlaying = false
         pausedtime = countdownconter;
         wasPaused = true;
-    }else {
+    } else {
         isPlaying = true;
         if (wait.length >= 1) {
             var duration = songlistGlobal[wait[0]].length
@@ -319,7 +325,7 @@ function playQueue(pause) {
                     console.log(countdownconter)
                     document.getElementById("actLength").innerText = toMinSec(countdownconter)
 
-                    if (countdownconter <= 0 ) {
+                    if (countdownconter <= 0) {
                         decrementQueue()
                         return;
                     }
@@ -353,7 +359,7 @@ function playPlaylist(playlist) {
     playQueue()
 }
 
-function queuePlaylist(playlist){
+function queuePlaylist(playlist) {
     playlistlistGlobal[playlist].songs.forEach(song => {
         addToWait(getSongID(song))
     })
@@ -388,8 +394,8 @@ function createPlaylist() {
         body: JSON.stringify({
             name: "Neue Playlist"
         }),
-        headers:{
-            "Content-type":"application/json; charset=UTF-8"
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
         }
     })
         .then((response) => response.json())
@@ -399,17 +405,18 @@ function createPlaylist() {
 
 function addSongToPlaylist(songID, playlistID) {
     let song = songlistGlobal[songID];
-    let playlist = playlistlistGlobal[playlistID]
-    let pId = playlist.id
+    let editPlaylist = playlistlistGlobal[playlistID]
+    let pId = editPlaylist.id
     fetch('http://localhost:8080/api/playlist/' + pId + '/add-song', {
         method: "PUT",
         body: song.id,
-        headers:{
-            "Content-type":"application/json; charset=UTF-8"
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
         }
     })
         .then((response) => response.json())
         .then((json) => console.log(json))
+    playlist(pId)
 }
 
 // function openSidebar() {
@@ -421,20 +428,18 @@ function addSongToPlaylist(songID, playlistID) {
 //     document.getElementById("sidebardiv").style.display = "none";
 //     document.getElementById('contentId').style.marginLeft= "0"
 // }
-function toggleSidebar(){
-    if (document.getElementById("sidebardiv").style.display == "none"){
+function toggleSidebar() {
+    if (document.getElementById("sidebardiv").style.display == "none") {
         document.getElementById("sidebardiv").style.display = "block";
-        document.getElementById('contentId').style.marginLeft= "20%"
-    }else {
+        document.getElementById('contentId').style.marginLeft = "20%"
+    } else {
         document.getElementById("sidebardiv").style.display = "none";
-        document.getElementById('contentId').style.marginLeft= "0"
+        document.getElementById('contentId').style.marginLeft = "0"
     }
 }
 
 
-
-
-function playlistScreen(){
+function playlistScreen() {
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
     songlist.className = "song-main-table"
     getAllSongs()

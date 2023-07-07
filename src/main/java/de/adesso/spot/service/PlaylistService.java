@@ -34,6 +34,8 @@ public class PlaylistService {
 
         playlist.addSong(song);
 
+        playlistRepository.save(playlist);
+
         return PlaylistMapper.toPlaylist(playlist);
     }
 
