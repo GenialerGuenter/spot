@@ -408,7 +408,7 @@ function createPlaylist() {
     })
         .then((response) => response.json())
         .then((json) => console.log(json))
-    setTimeout(showPlaylists, 50)
+    setTimeout(showPlaylists, 60)
 }
 
 function addSongToPlaylist(songID, playlistID) {
@@ -453,5 +453,7 @@ function playlistScreen() {
 }
 
 function deleteFromPlaylist(songId, playlistId){
-    console.log('delete: Song: '+songId+', Playlist: '+playlistId)
+    if (confirm('Bist du dir sicher?')){
+        console.log('delete: Song: '+songId+', Playlist: '+playlistId)
+    }
 }
