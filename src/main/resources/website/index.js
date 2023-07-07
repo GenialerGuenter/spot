@@ -265,6 +265,7 @@ function home() {
 //Verändert die seite zur Playlistanzeige und gibt die songs in der Playlist aus
 function playlist(id) {
     songlist.className = "song-playlist-table"
+    console.log(id)
     let i = 0;
     searchbarOn = false;
     fetch(`http://localhost:8080/api/playlist`).then(
@@ -416,7 +417,6 @@ function addSongToPlaylist(songID, playlistID) {
     })
         .then((response) => response.json())
         .then((json) => console.log(json))
-    playlist(pId)
 }
 
 // function openSidebar() {
@@ -437,7 +437,6 @@ function toggleSidebar() {
         document.getElementById('contentId').style.marginLeft = "0"
     }
 }
-
 
 function playlistScreen() {
     searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
