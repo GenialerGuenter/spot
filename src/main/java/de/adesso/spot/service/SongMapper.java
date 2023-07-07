@@ -12,12 +12,11 @@ class SongMapper {
                 .build();
     }
 
-//    static SongEntity toEntity(Song song) {
-//
-//        return SongEntity.builder()
-//                .title(song.getTitle())
-//                .artist(song.getArtist())
-//                .length(song.getLength())
-//                .build();
-//    }
+    static SongEntity toEntity(Song song) {
+        SongEntity newEntity = new SongEntity();
+        newEntity.setArtist(song.getArtist());
+        newEntity.setTitle(song.getTitle());
+        newEntity.setLength(song.getLength());
+        return newEntity;
+    }
 }

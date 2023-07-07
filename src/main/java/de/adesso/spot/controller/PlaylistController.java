@@ -1,12 +1,10 @@
 package de.adesso.spot.controller;
 
 import de.adesso.spot.model.Playlist;
+import de.adesso.spot.model.Song;
 import de.adesso.spot.service.PlaylistService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +15,12 @@ import java.util.List;
 public class PlaylistController {
 
     private final PlaylistService service;
+
+//    @PutMapping()
+//    Playlist updateSong(@RequestBody Playlist playlist, Song song){ return service.updatePlaylist(playlist, song); }
+
+    @PostMapping()
+    Playlist postSong(@RequestBody Playlist newPlaylist){ return service.createNewPlaylist(newPlaylist); }
 
     @GetMapping
     List<Playlist> getAllPlaylists(){ return service.getAllPlaylists(); }

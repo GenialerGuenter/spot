@@ -13,7 +13,7 @@ let wasPaused = false;
 
 // createSong('Freebird', 'unbekannt', 500)
 getAllSongs()
-
+showPlaylists()
 
 function createSong(title, artist, length) {
     fetch('http://localhost:8080/api/song', {
@@ -198,20 +198,21 @@ function getAllSongs() {
     )
 }
 
-
-fetch("http://localhost:8080/api/playlist").then(
-    o => {
-        return o.json()
-    }
-).then(
-    json => {
-        json.forEach(element => {
-            const playlistHTML = '<button id="newplaylistbutton" onClick="playlist(' + element.id + ')">' + element.name + '</button>';
-            playlistlist.innerHTML += playlistHTML;
-        })
-    }
-)
-
+function showPlaylists() {
+    fetch("http://localhost:8080/api/playlist").then(
+        o => {
+            return o.json()
+        }
+    ).then(
+        json => {
+            playlistlist.innerHTML = ""
+            json.forEach(element => {
+                const playlistHTML = '<button id="newplaylistbutton" onClick="playlist(' + element.id + ')">' + element.name + '</button>';
+                playlistlist.innerHTML += playlistHTML;
+            })
+        }
+    )
+}
 
 //Funktion um die Suchleiste suchen zu lassen
 if (document.getElementById('searchbar').value != null) {
@@ -376,12 +377,20 @@ function toMinSec(time) {
     return min + ':' + sec;
 }
 
-function createPlaylst() {
-    alert('Platzhalter für Playlisterstellung')
-    if (window.width <= 540){
-        toggleSidebar()
-    }
-
+function createPlaylist() {
+    fetch('http://localhost:8080/api/playlist', {
+        method: "POST",
+        body: JSON.stringify({
+            name: "Neue Playlist",
+            // songs: [songlistGlobal[0]]
+        }),
+        headers:{
+            "Content-type":"application/json; charset=UTF-8"
+        }
+    })
+        .then((response) => response.json())
+        .then((json) => console.log(json))
+    setTimeout(showPlaylists, 50)
 }
 // function openSidebar() {
 //     document.getElementById("sidebardiv").style.display = "block";

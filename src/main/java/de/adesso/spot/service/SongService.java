@@ -15,9 +15,9 @@ public class SongService {
 
     private final SongRepository repository;
 
-//    public Song createNewSong(Song newSong){
-//        return SongMapper.toSong(repository.save(SongMapper.toEntity(newSong)));
-//    }
+    public Song createNewSong(Song newSong){
+        return SongMapper.toSong(repository.save(SongMapper.toEntity(newSong)));
+    }
 
     public List<Song> getAllSongs() {
         return repository.findAll()

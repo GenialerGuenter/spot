@@ -1,10 +1,7 @@
 package de.adesso.spot.persistence;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,11 +11,12 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table(name = "SONG")
 @Getter
 @Setter
-//@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SongEntity {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
 
@@ -33,8 +31,4 @@ public class SongEntity {
 
     @ManyToMany(mappedBy = "playlistSongs")
     private List<PlaylistEntity> playlists;
-
-//    public SongEntity() {
-//
-//    }
 }
