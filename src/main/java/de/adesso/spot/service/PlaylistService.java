@@ -18,6 +18,26 @@ public class PlaylistService {
     private final PlaylistRepository playlistRepository;
     private final SongRepository songRepository;
 
+    public Playlist deleteSong(Long playlistId, Long songId){
+        Optional<PlaylistEntity> playlistEntity = playlistRepository.findById(playlistId);
+        if (playlistEntity.isEmpty()) {
+            throw new RuntimeException();
+        }
+
+        PlaylistEntity playlist = playlistEntity.get();
+
+        Optional<SongEntity> songEntity = songRepository.findById(songId);
+        if (songEntity.isEmpty()) {
+            throw new RuntimeException();
+        }
+        SongEntity song = songEntity.get();
+
+        playlist.deleteSong(song);
+
+        playlistRepository.save(playlist);
+        return PlaylistMapper.toPlaylist(playlist);
+    }
+
     public Playlist updatePlaylist(Long playlistId, Long songId) {
         Optional<PlaylistEntity> playlistEntity = playlistRepository.findById(playlistId);
         if (playlistEntity.isEmpty()) {

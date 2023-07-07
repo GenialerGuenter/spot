@@ -23,6 +23,11 @@ public class PlaylistController {
         return service.updatePlaylist(playlistId, songId);
     }
 
+    @PutMapping("/{playListId}/delete-song")
+    Playlist deleteSong(@PathVariable("playListId") Long playlistId, @RequestBody Long songId){
+        return service.deleteSong(playlistId, songId);
+    }
+
     @PostMapping()
     Playlist postSong(@RequestBody Playlist newPlaylist){ return service.createNewPlaylist(newPlaylist); }
 
