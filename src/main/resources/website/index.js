@@ -304,7 +304,7 @@ function playQueue(pause) {
         isPlaying = true;
         if (wait.length >= 1) {
             var duration = songlistGlobal[wait[0]].length
-            console.log('now playling: ' + songlistGlobal[wait[0]].title)
+            console.log('now playling: ' + songlistGlobal[wait[0]].title + ' - ' + songlistGlobal[wait[0]].artist)
             if (!wasPaused) {
                 countdownconter = duration;
             } else {
@@ -314,11 +314,11 @@ function playQueue(pause) {
 
             function countDown() {
                 if (isPlaying && wait.length !== 0) {
-                    console.log(countdownconter)
                     countdownconter--
+                    console.log(countdownconter)
                     document.getElementById("actLength").innerText = toMinSec(countdownconter)
 
-                    if (countdownconter < 0 ) {
+                    if (countdownconter <= 0 ) {
                         decrementQueue()
                         return;
                     }
@@ -327,7 +327,6 @@ function playQueue(pause) {
                 }
             }
 
-            // setTimeout(decrementQueue,duration*1000)  //deletes the current song after songs duration
             function decrementQueue() {
                 history.push(wait.shift())
                 waitinglist--
