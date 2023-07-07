@@ -7,7 +7,7 @@ let waitinglist = 0;
 const wait = [];
 const history = [];
 let isPlaying = false;
-let countdownconter; //variable for the live playback
+var countdownconter = 10; //variable for the live playback
 let pausedtime = 100;
 let wasPaused = false;
 
@@ -315,9 +315,14 @@ function playQueue(pause) {
 
             function countDown() {
                 if (isPlaying && wait.length !== 0) {
-                    countdownconter--
+
+                    if(!isNaN(countdownconter)){                       //Checks if countdowncounter is a Number  if yes --> decrement and show time in Min/Sec
+                        countdownconter--
+                        document.getElementById("actLength").innerText = toMinSec(countdownconter)
+                    }else {                                                                                    // if not --> show countdowntimer anyways because I want to be able to just change the countdown to whatever
+                        document.getElementById("actLength").innerText = countdownconter
+                    }
                     console.log(countdownconter)
-                    document.getElementById("actLength").innerText = toMinSec(countdownconter)
 
                     if (countdownconter <= 0 ) {
                         decrementQueue()
