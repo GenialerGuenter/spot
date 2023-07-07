@@ -11,6 +11,7 @@ var countdownconter = 10; //variable for the live playback
 let pausedtime = 100;
 let wasPaused = false;
 let searchbarOn = true;
+const songListPlaylist = [];
 
 getAllSongs()
 showPlaylists()
@@ -284,7 +285,7 @@ function playlist(id) {
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
                             const songHTML = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td>' +
-                                toMinSec(song.length) + '</td></tr>';
+                                toMinSec(song.length) + '</td><td><button onclick="deleteFromPlaylist('+song.id+', '+element.id+')"><i class="fa-regular fa-trash-can"></i></button></td></tr>';
                             const newRow = songlist.insertRow(songlist.rows.length);
                             newRow.innerHTML = songHTML;
                         }
@@ -394,10 +395,11 @@ function toMinSec(time) {
 }
 
 function createPlaylist() {
+    let newPlaylistName = prompt('Wie möchtest du deine Playlist benennen?')
     fetch('http://localhost:8080/api/playlist', {
         method: "POST",
         body: JSON.stringify({
-            name: "Neue Playlist"
+            name: newPlaylistName
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -449,4 +451,8 @@ function playlistScreen() {
     songlist.className = "song-main-table"
     getAllSongs()
 
+}
+
+function deleteFromPlaylist(songId, playlistId){
+    console.log('delete: Song: '+songId+', Playlist: '+playlistId)
 }
