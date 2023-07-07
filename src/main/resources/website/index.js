@@ -307,6 +307,7 @@ function playlist(id) {
         json => {
             json.forEach(element => {
                 if (element.id === id) {
+                    document.getElementById("searchbardiv").className="playlist"
                     searchBar.innerHTML = '<h1 id="playlistname">' + element.name +
                         '<button class="deletebutton playlist" onclick="playPlaylist(' + i + ')">' +
                         '<i class="fa-solid fa-play fa-2xl" style="color: #000000;"></i>' +
