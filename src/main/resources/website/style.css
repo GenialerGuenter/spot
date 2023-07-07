@@ -282,12 +282,12 @@ a {
         scale: 0.75;
     }
     #searchbardiv input{
-        border: 3px solid;
+        border: 2px solid;
         border-radius: 5px;
-        margin-top: 5px;
-        font-size: 10px;
-        padding: 5%;
-        padding-right: 200%;
+        margin-top: 8px;
+        font-size: 14px;
+        padding: 5px;
+        padding-right: 300px;
 
     }
     .song-main-table{
@@ -346,12 +346,12 @@ a {
         scale: 0.5;
     }
     #searchbardiv input{
-        border: 3px solid;
+        border: 2px solid;
         border-radius: 5px;
-        margin-top: 5px;
-        font-size: 10px;
-        padding: 5%;
-        padding-right: 200%;
+        margin-top: 8px;
+        font-size: 25px;
+        padding: 10px;
+        padding-right: 50px;
 
     }
     .song-main-table{

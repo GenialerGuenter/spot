@@ -291,6 +291,7 @@ function home() {
     if (screen.width <= 540) {
         toggleSidebar()
     }
+
 }
 
 
