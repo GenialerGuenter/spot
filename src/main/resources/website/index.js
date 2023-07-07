@@ -422,18 +422,23 @@ function toMinSec(time) {
 
 function createPlaylist() {
     let newPlaylistName = prompt('Wie möchtest du deine Playlist benennen?')
-    fetch('http://localhost:8080/api/playlist', {
-        method: "POST",
-        body: JSON.stringify({
-            name: newPlaylistName
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    })
-        .then((response) => response.json())
-        .then((json) => console.log(json))
-    setTimeout(showPlaylists, 60)
+    if (newPlaylistName.length <= 14){
+        fetch('http://localhost:8080/api/playlist', {
+            method: "POST",
+            body: JSON.stringify({
+                name: newPlaylistName
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json))
+        setTimeout(showPlaylists, 60)
+    }else{
+        alert('too long :D')
+    }
+
 }
 
 function addSongToPlaylist(songID, playlistID) {
