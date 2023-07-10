@@ -432,17 +432,16 @@ function deletePlaylist(pId) {
     }
 }
 function deleteFromPlaylist(songId, pId) {
-    if (confirm('Bist du dir sicher?')) {
-        fetch('http://localhost:8080/api/playlist/' + pId + '/delete-song', {
-            method: "PUT",
-            body: songId,
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then((response) => response.json())
-            .then((json) => console.log(json))
-    }
+
+    fetch('http://localhost:8080/api/playlist/' + pId + '/delete-song', {
+        method: "PUT",
+        body: songId,
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+        .then((response) => response.json())
+        .then((json) => console.log(json))
     setTimeout(reloadPlaylist, 100)
 
     function reloadPlaylist() {
@@ -572,7 +571,7 @@ function toMinSec(time) {
 
 }
 function toggleSidebar() {
-    if (document.getElementById("sidebardiv").style.display == "none") {
+    if (document.getElementById("sidebardiv").style.display === "none") {
         document.getElementById("sidebardiv").style.display = "block";
         document.getElementById('contentId').style.marginLeft = "20%"
     } else {

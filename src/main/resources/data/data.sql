@@ -3,15 +3,15 @@ DELETE FROM SONG WHERE ID >= 1;
 DELETE FROM PLAYLIST WHERE ID >= 1;
 
 
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10000, 'Rick Astley', 150, 'Never gonna give you up');
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10003, 'Rick Astley', 150, 'Never gonna give you down');
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10004, 'Darude', 420, 'Sandstorm');
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10005, 'Bring Me The Horizon', 228, 'Can You Feel My Heart');
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10006, 'Alexander Alexandrov', 999, 'Soviet Union Anthem');
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10007, 'NF', 435, 'HOPE');
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10008, 'NF', 124, 'PANDEMONIUM');
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10009, 'Elton John', 547, 'Im Still Standing');
-INSERT INTO SONG ("ID", "TITLE", "LENGTH", "ARTIST") VALUES (10010, 'The Mamas & The Papas', 15, 'California Dreaming');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10000, 'Rick Astley', 150, 'Never gonna give you up');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10003, 'Rick Astley', 150, 'Never gonna give you down');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10004, 'Darude', 420, 'Sandstorm');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10005, 'Bring Me The Horizon', 228, 'Can You Feel My Heart');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10006, 'Alexander Alexandrov', 999, 'Soviet Union Anthem');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10007, 'NF', 435, 'HOPE');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10008, 'NF', 124, 'PANDEMONIUM');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10009, 'Elton John', 547, 'Im Still Standing');
+INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10010, 'The Mamas & The Papas', 15, 'California Dreaming');
 
 INSERT INTO PLAYLIST ("ID", "NAME") VALUES (10000, 'Playlist 1');
 INSERT INTO PLAYLIST ("ID", "NAME") VALUES (10003, 'Playlist 2');
