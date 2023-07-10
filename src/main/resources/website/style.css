@@ -264,6 +264,10 @@ a {
     font-size: 100%;
 }
 
+.songForm{
+    line-height: 200%;
+}
+
 @media screen and (min-width: 540px) and (max-width: 1550px) {
     body {
 

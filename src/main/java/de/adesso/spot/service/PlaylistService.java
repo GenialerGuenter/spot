@@ -1,6 +1,7 @@
 package de.adesso.spot.service;
 
 import de.adesso.spot.model.Playlist;
+import de.adesso.spot.model.Song;
 import de.adesso.spot.persistence.PlaylistEntity;
 import de.adesso.spot.persistence.PlaylistRepository;
 import de.adesso.spot.persistence.SongEntity;
@@ -21,18 +22,9 @@ public class PlaylistService {
     private final SongRepository songRepository;
 
     public Playlist deleteSong(Long playlistId, Long songId){
-        Optional<PlaylistEntity> playlistEntity = playlistRepository.findById(playlistId);
-        if (playlistEntity.isEmpty()) {
-            throw new RuntimeException();
-        }
+        PlaylistEntity playlist = checkEntity(playlistId);
 
-        PlaylistEntity playlist = playlistEntity.get();
-
-        Optional<SongEntity> songEntity = songRepository.findById(songId);
-        if (songEntity.isEmpty()) {
-            throw new RuntimeException();
-        }
-        SongEntity song = songEntity.get();
+        SongEntity song = checkSong(songId);
 
         playlist.deleteSong(song);
 
@@ -41,29 +33,15 @@ public class PlaylistService {
     }
 
     public Playlist deletePlaylist(Long playlistId){
-        Optional<PlaylistEntity> playlistEntity = playlistRepository.findById(playlistId);
-        if (playlistEntity.isEmpty()) {
-            throw new RuntimeException();
-        }
-
-        PlaylistEntity playlist = playlistEntity.get();
+        PlaylistEntity playlist = checkEntity(playlistId);
         playlistRepository.delete(playlist);
         return PlaylistMapper.toPlaylist(playlist);
     }
 
     public Playlist updatePlaylist(Long playlistId, Long songId) {
-        Optional<PlaylistEntity> playlistEntity = playlistRepository.findById(playlistId);
-        if (playlistEntity.isEmpty()) {
-            throw new RuntimeException();
-        }
+        PlaylistEntity playlist = checkEntity(playlistId);
 
-        PlaylistEntity playlist = playlistEntity.get();
-
-        Optional<SongEntity> songEntity = songRepository.findById(songId);
-        if (songEntity.isEmpty()) {
-            throw new RuntimeException();
-        }
-        SongEntity song = songEntity.get();
+        SongEntity song = checkSong(songId);
 
         playlist.addSong(song);
 
@@ -84,4 +62,19 @@ public class PlaylistService {
                 .toList();
     }
 
+    private PlaylistEntity checkEntity(Long playlistId){
+        Optional<PlaylistEntity> playlistEntity = playlistRepository.findById(playlistId);
+        if (playlistEntity.isEmpty()) {
+            throw new RuntimeException();
+        }
+        return playlistEntity.get();
+    }
+
+    private SongEntity checkSong(Long songId){
+        Optional<SongEntity> songEntity = songRepository.findById(songId);
+        if (songEntity.isEmpty()) {
+            throw new RuntimeException();
+        }
+        return songEntity.get();
+    }
 }
