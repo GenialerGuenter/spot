@@ -144,15 +144,28 @@ a {
 .song-playlist-table{
     padding-top:0;
     border: none;
+    border-collapse: collapse;
     text-align: left;
     position: relative;
+    /*display: block;*/
 }
 .song-playlist-table th,.song-playlist-table td {
     font-size: 23px;
     padding: 15px;
     border: none;
+    border-spacing: 0;
+    border-collapse: collapse;
     padding-left: 100px;
 }
+.song-playlist-table #deletesongfromplaylist:hover i{
+    color: red;
+}
+
+.song-playlist-table tr:hover #deletesongfromplaylist{
+    color: #949494;
+
+}
+
 
 #backtoplaylist {
     padding-left: 20px;
@@ -160,6 +173,14 @@ a {
     border: none;
 }
 
+#deletesongfromplaylist{
+    color: #e7e7e7;
+    background-color: transparent;
+    border: none;
+    scale: 2;
+    cursor: pointer;
+    transition: all 169ms ease-out 0s;
+}
 /*Der Style für den Footer*/
 
 .footer{
