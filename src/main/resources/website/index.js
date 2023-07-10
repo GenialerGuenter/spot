@@ -113,7 +113,7 @@ function playlist(id) {
                         '<button class="newSongs" onclick="newSongs(' + id + ')">' +
                         'Songs hinzufügen' +
                         '</button>'
-                    '</div>'
+                        '</div>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
                             const songHTML = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td>' +
