@@ -324,6 +324,10 @@ a {
         padding-right: 300px;
 
     }
+    #playlistname{
+        scale: 0.6;
+        margin: 0;
+    }
     .song-main-table{
         padding-top: 10%;
         border: none;
