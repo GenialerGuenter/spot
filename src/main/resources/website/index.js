@@ -18,7 +18,9 @@ content()
 showPlaylists()
 getAllSongs()
 
+
 // Methode um zwischen verschiedenen Seiten zu wechseln
+
 function pageSwitch(page, id) {
     songTitle = false
     if (page === -1) {
@@ -29,9 +31,11 @@ function pageSwitch(page, id) {
     } else if (page === 1) {
         content()
         playlist(id)
+    }else if (page === 2){
+        let sId = prompt("Song Id")
+        deleteSongGlobal(sId)
     }
 }
-
 // Erstellt den Hauptcontent für Home und die Playlist
 function content() {
     document.getElementById('contentId').innerHTML = '<i class="fa-solid fa-bars fa-2xl switch" onclick="toggleSidebar()"></i>' +
@@ -55,7 +59,6 @@ function content() {
     searchBar = document.getElementById('searchbardiv');
     console.log(1)
 }
-
 // Ruft die Homeseite auf
 function home() {
     console.log(4)
@@ -70,24 +73,21 @@ function home() {
     }
 
 }
-
 // Ruft das Formular zum Erstellen eines neuen Songs auf
-function newSong(){
+function newSong() {
     searchbarOn = false
     songTitle = true
     document.getElementById('contentId').innerHTML = '<h1 id="songTitle">Neuer Song</h1>' +
         '<form action="" method="post" id="newSongForm" class="songForm">' +
         '<label for="title">Der Name des Songs:</label><br>' +
-        '<input type="text" id="title" value="Neuer Song"><br>' +
+        '<input type="text" id="title" value="Neuer Song" onkeyup="refreshTitle()"><br>' +
         '<label for="artist">Der Name des Künstlers/der Künsterin:</label><br>' +
         '<input type="text" id="artist"><br>' +
         '<label for="length">Die Länge des Songs:</label><br>' +
-        '<input type="number" id="length"><br><br>' +
+        '<input type="time" step="1" id="length" value="00:00:00"><br><br>' +
         '<input type="button" onclick="createSong()" value="Submit">' +
         '</form>'
-    setInterval(refreshTitle, 200)
 }
-
 // Verändert die Seite zur Playlistanzeige und gibt die Songs in der Playlist aus
 function playlist(id) {
     songlist.className = "song-playlist-table"
@@ -132,7 +132,6 @@ function playlist(id) {
         toggleSidebar()
     }
 }
-
 // Verändert die Seite zu einer Art Homebildschirm, bei dem Lieder ausgewählt werden können
 function newSongs(playlistId) {
     searchbarOn = true;
@@ -144,6 +143,7 @@ function newSongs(playlistId) {
         toggleSidebar()
     }
 }
+
 
 // Methoden der Warteschlange
 function addToWait(songID) {
@@ -346,7 +346,8 @@ function playPlaylist(playlist) {
 function createSong() {
     let title = document.getElementById("title").value
     let artist = document.getElementById("artist").value
-    let length = document.getElementById("length").value
+    let lengthString = document.getElementById("length").value
+    let length = parseTime(lengthString)
     fetch('http://localhost:8080/api/song', {
         method: "POST",
         body: JSON.stringify({
@@ -361,8 +362,21 @@ function createSong() {
         .then((response) => response.json())
         .then((json) => console.log(json))
     setTimeout(mini, 50)
+
     function mini() {
         pageSwitch(-1)
+    }
+}
+function deleteSongGlobal(sId){
+    if (confirm('Bist du dir sicher?')) {
+        fetch('http://localhost:8080/api/song/' + sId + '/delete-song', {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json))
     }
 }
 function createPlaylist() {
@@ -506,8 +520,8 @@ function showPlaylists() {
     )
     console.log(2)
 }
-function refreshTitle(){
-    if(songTitle) {
+function refreshTitle() {
+    if (songTitle) {
         document.getElementById("songTitle").innerHTML = document.getElementById("title").value
     }
 }
@@ -568,4 +582,55 @@ function getSongID(songC) {
         return ind;
     }
     return -1;
+}
+function parseTime(time) {
+    let sec = 0
+    let which = 0
+    for (let i = time.length-1; i > 0; i--) {
+        if (time.charAt(i) !== ':') {
+            if (decide(i, 0)) {
+                addToSec(which, 0)
+            } else if (decide(i, 1)) {
+                addToSec(which, 1)
+            } else if (decide(i, 2)) {
+                addToSec(which, 2)
+            } else if (decide(i, 3)) {
+                addToSec(which, 3)
+            } else if (decide(i, 4)) {
+                addToSec(which, 4)
+            } else if (decide(i, 5)) {
+                addToSec(which, 5)
+            } else if (decide(i, 6)) {
+                addToSec(which, 6)
+            } else if (decide(i, 7)) {
+                addToSec(which, 7)
+            } else if (decide(i, 8)) {
+                addToSec(which, 8)
+            } else if (decide(i, 9)) {
+                addToSec(which, 9)
+            }
+        }
+    }
+    return sec
+
+    function decide(ind, num) {
+        return time.charAt(ind) == num
+    }
+
+    function addToSec(what, num) {
+        console.log("what " + what)
+        console.log(num)
+        if(num >0) {
+            if (what === 0) {
+                sec += num
+                which++
+            } else if (what % 2 === 0) {
+                addToSec(what - 1, (num * 6))
+            } else {
+                addToSec(what - 1, num * 10)
+            }
+        }else{
+            which++
+        }
+    }
 }

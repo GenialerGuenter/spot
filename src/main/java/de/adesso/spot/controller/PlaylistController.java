@@ -29,7 +29,7 @@ public class PlaylistController {
     }
 
     @PutMapping("/{playListId}/delete-playlist")
-    Playlist deleteSong(@PathVariable("playListId") Long playlistId){
+    Playlist deletePlaylist(@PathVariable("playListId") Long playlistId){
         return service.deletePlaylist(playlistId);
     }
 
