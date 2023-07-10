@@ -54,12 +54,16 @@ ul{
 }
 
 .newSongs{
-    width: 30%;
+    width: 14rem;
     padding: 10px 16px 10px 10px;
-    font-size: 25px;
-    border-radius: 10px;
+    font-size: 20px;
+    border-radius: 8px;
     border: 3px solid rgb(155, 152, 152);
     background-color: transparent;
+    transition: all 100ms ease-out 0s;
+}
+.newSongs:hover{
+    background-color: rgb(171, 171, 171);
 }
 
 .sidebar td{

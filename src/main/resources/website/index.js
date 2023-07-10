@@ -264,6 +264,9 @@ function playSong(song) {
     clearWait()
     addToWait(song)
     actWaitList()
+    if (isPlaying){
+        playQueue()
+    }
     playQueue(false)
 }
 function clearWait() {
@@ -282,10 +285,10 @@ function playQueue(pause) {
         if (wait.length >= 1) {
             var duration = songlistGlobal[wait[0]].length
             console.log('now playling: ' + songlistGlobal[wait[0]].title + ' - ' + songlistGlobal[wait[0]].artist)
-            if (!wasPaused) {
-                countdownconter = duration;
-            } else {
+            if (wasPaused) {
                 countdownconter = pausedtime;
+            } else {
+                countdownconter = duration;
             }
             countDown()
 
@@ -538,12 +541,21 @@ function searchBarSearch() {
     }
 }
 function toMinSec(time) {
-    let min = Math.floor(time / 60)
+    let h = Math.floor(time/3600)
+    let min = Math.floor((time-(h * 3600))/ 60)
     let sec = time % 60
     if (sec < 10) {
         sec = '0' + sec
     }
-    return min + ':' + sec;
+    if(h>0){
+        if (min<10){
+            min= '0'+min
+        }
+        return h+ ':'+min + ':' + sec;
+    }else{
+        return min+':'+sec
+    }
+
 }
 function toggleSidebar() {
     if (document.getElementById("sidebardiv").style.display == "none") {
