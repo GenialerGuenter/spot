@@ -599,42 +599,18 @@ function parseTime(time) {
     let which = 0
     for (let i = time.length-1; i >= 0; i--) {
         if (time.charAt(i) !== ':') {
-            if (decide(i, 0)) {
-                addToSec(which, 0)
-            } else if (decide(i, 1)) {
-                addToSec(which, 1)
-            } else if (decide(i, 2)) {
-                addToSec(which, 2)
-            } else if (decide(i, 3)) {
-                addToSec(which, 3)
-            } else if (decide(i, 4)) {
-                addToSec(which, 4)
-            } else if (decide(i, 5)) {
-                addToSec(which, 5)
-            } else if (decide(i, 6)) {
-                addToSec(which, 6)
-            } else if (decide(i, 7)) {
-                addToSec(which, 7)
-            } else if (decide(i, 8)) {
-                addToSec(which, 8)
-            } else if (decide(i, 9)) {
-                addToSec(which, 9)
-            }
+            addToSec(which, time.charAt(i))
         }
     }
     console.log(sec)
     return sec
-
-    function decide(ind, num) {
-        return time.charAt(ind) == num
-    }
 
     function addToSec(what, num) {
         console.log("what " + what)
         console.log(num)
         if(num >0) {
             if (what === 0) {
-                sec += num
+                sec += parseInt(num)
                 which++
             } else if (what % 2 === 0) {
                 addToSec(what - 1, (num * 6))
