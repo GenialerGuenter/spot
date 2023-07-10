@@ -597,7 +597,7 @@ function getSongID(songC) {
 function parseTime(time) {
     let sec = 0
     let which = 0
-    for (let i = time.length-1; i > 0; i--) {
+    for (let i = time.length-1; i >= 0; i--) {
         if (time.charAt(i) !== ':') {
             if (decide(i, 0)) {
                 addToSec(which, 0)
@@ -622,6 +622,7 @@ function parseTime(time) {
             }
         }
     }
+    console.log(sec)
     return sec
 
     function decide(ind, num) {
