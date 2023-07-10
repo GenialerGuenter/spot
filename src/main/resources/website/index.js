@@ -128,16 +128,16 @@ function playlist(id) {
 
         }
     )
-    if (screen.width <= 540) {
-        toggleSidebar()
-    }
+    // if (screen.width <= 540) {
+    //     toggleSidebar()
+    // }
 }
 
 // Verändert die Seite zu einer Art Homebildschirm, bei dem Lieder ausgewählt werden können
 function newSongs(playlistId) {
     searchbarOn = true;
     playlistSearch = playlistId;
-    searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
+    searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search..."><button id="backtoplaylist" onclick="playlist('+playlistId+')"><i class="fas fa-level-down fa-rotate-90 fa-2xl"></i></button>'
     songlist.className = "song-main-table"
     getAllSongs()
     if (screen.width <= 540) {
@@ -495,7 +495,7 @@ function showPlaylists() {
                     + element.name +
                     '</td><th>' +
                     '<button onclick="deletePlaylist(' + element.id + ')" class="deletebutton">' +
-                    '<i class="fa-regular fa-trash-can" ></i>' +
+                    '<i class="fa-regular fa-trash-can" ></i>' +  //regular class --> fa-regular fa-trash-can
                     '</button>' +
                     '</th></tr></table>'
                 '</button>';

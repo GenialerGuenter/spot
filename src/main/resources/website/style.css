@@ -154,6 +154,12 @@ a {
     padding-left: 100px;
 }
 
+#backtoplaylist {
+    padding-left: 20px;
+    background-color: transparent;
+    border: none;
+}
+
 /*Der Style für den Footer*/
 
 .footer{
