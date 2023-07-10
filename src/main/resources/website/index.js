@@ -117,7 +117,7 @@ function playlist(id) {
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
                             const songHTML = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td>' +
-                                toMinSec(song.length) + '</td><td><button onclick="deleteFromPlaylist(' + song.id + ', ' + element.id + ')"><i class="fa-regular fa-trash-can"></i></button></td></tr>';
+                                toMinSec(song.length) + '</td><td><button id="deletesongfromplaylist" onclick="deleteFromPlaylist(' + song.id + ', ' + element.id + ')" ><i class="fa-regular fa-trash-can"></i></button></td></tr>';
                             const newRow = songlist.insertRow(songlist.rows.length);
                             newRow.innerHTML = songHTML;
                         }
@@ -128,15 +128,15 @@ function playlist(id) {
 
         }
     )
-    if (screen.width <= 540) {
-        toggleSidebar()
-    }
+    // if (screen.width <= 540) {
+    //     toggleSidebar()
+    // }
 }
 // Verändert die Seite zu einer Art Homebildschirm, bei dem Lieder ausgewählt werden können
 function newSongs(playlistId) {
     searchbarOn = true;
     playlistSearch = playlistId;
-    searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search...">'
+    searchBar.innerHTML = '<input type="text" id="searchbar" placeholder="search..."><button id="backtoplaylist" onclick="playlist('+playlistId+')"><i class="fas fa-level-down fa-rotate-90 fa-2xl"></i></button>'
     songlist.className = "song-main-table"
     getAllSongs()
     if (screen.width <= 540) {
@@ -264,6 +264,9 @@ function playSong(song) {
     clearWait()
     addToWait(song)
     actWaitList()
+    if (isPlaying){
+        playQueue()
+    }
     playQueue(false)
 }
 function clearWait() {
@@ -282,10 +285,10 @@ function playQueue(pause) {
         if (wait.length >= 1) {
             var duration = songlistGlobal[wait[0]].length
             console.log('now playling: ' + songlistGlobal[wait[0]].title + ' - ' + songlistGlobal[wait[0]].artist)
-            if (!wasPaused) {
-                countdownconter = duration;
-            } else {
+            if (wasPaused) {
                 countdownconter = pausedtime;
+            } else {
+                countdownconter = duration;
             }
             countDown()
 
@@ -509,7 +512,7 @@ function showPlaylists() {
                     + element.name +
                     '</td><th>' +
                     '<button onclick="deletePlaylist(' + element.id + ')" class="deletebutton">' +
-                    '<i class="fa-regular fa-trash-can" ></i>' +
+                    '<i class="fa-regular fa-trash-can" ></i>' +  //regular class --> fa-regular fa-trash-can
                     '</button>' +
                     '</th></tr></table>'
                 '</button>';
@@ -552,12 +555,21 @@ function searchBarSearch() {
     }
 }
 function toMinSec(time) {
-    let min = Math.floor(time / 60)
+    let h = Math.floor(time/3600)
+    let min = Math.floor((time-(h * 3600))/ 60)
     let sec = time % 60
     if (sec < 10) {
         sec = '0' + sec
     }
-    return min + ':' + sec;
+    if(h>0){
+        if (min<10){
+            min= '0'+min
+        }
+        return h+ ':'+min + ':' + sec;
+    }else{
+        return min+':'+sec
+    }
+
 }
 function toggleSidebar() {
     if (document.getElementById("sidebardiv").style.display == "none") {
