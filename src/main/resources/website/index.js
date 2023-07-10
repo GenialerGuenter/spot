@@ -113,7 +113,7 @@ function playlist(id) {
                         '<button class="newSongs" onclick="newSongs(' + id + ')">' +
                         'Songs hinzufügen' +
                         '</button>'
-                    '</div>'
+                        '</div>'
                     songlist.innerHTML = ""
                     element.songs.forEach(song => {
                             const songHTML = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td>' +
@@ -264,9 +264,7 @@ function playSong(song) {
     clearWait()
     addToWait(song)
     actWaitList()
-    if (isPlaying){
-        playQueue()
-    }
+    countdownconter=songlistGlobal[wait[0]].length;
     playQueue(false)
 }
 function clearWait() {
@@ -298,7 +296,7 @@ function playQueue(pause) {
                     if (!isNaN(countdownconter)) {                       //Checks if countdowncounter is a Number  if yes --> decrement and show time in Min/Sec
                         countdownconter--
                         document.getElementById("actLength").innerText = toMinSec(countdownconter)
-                    } else {                                                                                    // if not --> show countdowntimer anyways because I want to be able to just change the countdown to whatever
+                    } else {                                                                                    // if not --> show countdowntimer anyway because I want to be able to just change the countdown to whatever
                         document.getElementById("actLength").innerText = countdownconter
                     }
                     console.log(countdownconter)
