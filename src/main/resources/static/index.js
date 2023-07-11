@@ -80,7 +80,7 @@ function newSong() {
     document.getElementById('contentId').innerHTML = '<h1 id="songTitle">Neuer Song</h1>' +
         '<form action="" method="post" id="newSongForm" class="songForm">' +
         '<label for="title">Der Name des Songs:</label><br>' +
-        '<input type="text" id="title" value="Neuer Song" onkeyup="refreshTitle()"><br>' +
+        '<input type="text" id="title" placeholder="Neuer Song" onkeyup="refreshTitle()"><br>' +
         '<label for="artist">Der Name des Künstlers/der Künsterin:</label><br>' +
         '<input type="text" id="artist"><br>' +
         '<label for="length">Die Länge des Songs:</label><br>' +
