@@ -349,7 +349,7 @@ function createSong() {
     let artist = document.getElementById("artist").value.replace(/</g, "&lt;").replace(/>/g, "&gt;");       //um zu vermeiden, dass der songersteller irgendwie die website verändert
     let lengthString = document.getElementById("length").value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     let length = parseTime(lengthString)
-    fetch('http://localhost:8080/api/song', {
+    fetch('/api/song', {
         method: "POST",
         body: JSON.stringify({
             title: title,
