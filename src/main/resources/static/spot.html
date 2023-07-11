@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Spot ♫</title>
     <!-- Verlinkung des Stylesheets -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <!-- Verlinkung des json Scripts -->
-    <link rel="script" href="index.js">
     <!-- Verlinkung des Iconkits -->
     <script src="https://kit.fontawesome.com/ac0acee796.js" crossorigin="anonymous"></script>
 </head>
@@ -26,6 +26,10 @@
     </ul>
 
 </div>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 
 <!-- Hauptseite -->
 <div style="margin-left:20%" class="content" id="contentId"></div>
@@ -73,7 +77,7 @@
     </div>
 
     <!-- Das Skript der Götter!!!          (Samuel und Simon) -->
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
 </div>
 </body>
 </html>
