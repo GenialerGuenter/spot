@@ -165,9 +165,9 @@ function actWaitList() {
     }
     wait.forEach(element => {
         if (i === 0) {
-            document.getElementById("actName").innerText = songlistGlobal[element].title
+            document.getElementById("actName").innerText = songlistGlobal[element].title.replace( "&lt;","<").replace( "&gt;",">");
             document.getElementById("actLength").innerText = toMinSec(songlistGlobal[element].length)
-            document.getElementById("actArtist").innerText = songlistGlobal[element].artist
+            document.getElementById("actArtist").innerText = songlistGlobal[element].artist.replace( "&lt;","<").replace( "&gt;",">");
         } else {
             console.log(wait.length)
             let waitHTML = '<th><button class="songBtn" onclick="moveToSong(' + i + ')"><div class="waitSong">\n' +
@@ -345,9 +345,9 @@ function playPlaylist(playlist) {
 
 // Datenbankbearbeitende Methoden
 function createSong() {
-    let title = document.getElementById("title").value
-    let artist = document.getElementById("artist").value
-    let lengthString = document.getElementById("length").value
+    let title = document.getElementById("title").value.replace(/</g, "&lt;").replace(/>/g, "&gt;");         //das .replace ersetzt potentielle html elemente
+    let artist = document.getElementById("artist").value.replace(/</g, "&lt;").replace(/>/g, "&gt;");       //um zu vermeiden, dass der songersteller irgendwie die website verändert
+    let lengthString = document.getElementById("length").value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     let length = parseTime(lengthString)
     fetch('http://localhost:8080/api/song', {
         method: "POST",
@@ -381,7 +381,7 @@ function deleteSongGlobal(sId){
     }
 }
 function createPlaylist() {
-    let newPlaylistName = prompt('Wie möchtest du deine Playlist benennen?')
+    let newPlaylistName = prompt('Wie möchtest du deine Playlist benennen?').replace(/</g, "&lt;").replace(/>/g, "&gt;"); //.replace vermeidet HTML Elemente
     if (newPlaylistName.length <= 1400) {
         fetch('http://localhost:8080/api/playlist', {
             method: "POST",
@@ -522,7 +522,7 @@ function showPlaylists() {
 }
 function refreshTitle() {
     if (songTitle) {
-        document.getElementById("songTitle").innerHTML = document.getElementById("title").value
+        document.getElementById("songTitle").innerHTML = document.getElementById("title").value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
 }
 if (document.getElementById('searchbar').value != null) {
