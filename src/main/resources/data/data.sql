@@ -14,6 +14,8 @@ INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10009, 'Elton John'
 INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10010, 'The Mamas & The Papas', 15, 'California Dreaming');
 INSERT INTO SONG ("ID", "ARTIST", "LENGTH", "TITLE") VALUES (10011, 'Barcode', 40271 , '|||ll|ll|lll||l'); -- Yo was geht Samuel. Das hier ist einfach nur nen kleiner Joke  ψ(｀∇´)ψ  （＾-＾）  (PS: Barcode funktioniert nicht)
 
+INSERT INTO MY_USER ("USER_NAME", "PASSWORD", "ROLE") VALUES ('samuel', '0906', 'ADMIN');
+
 INSERT INTO PLAYLIST ("ID", "NAME") VALUES (10000, 'Playlist 1');
 INSERT INTO PLAYLIST ("ID", "NAME") VALUES (10003, 'Playlist 2');
 -- INSERT INTO PLAYLIST VALUES (10002, 'Playlist 1');

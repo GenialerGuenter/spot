@@ -1,9 +1,15 @@
 package de.adesso.spot.security;
 
+import de.adesso.spot.persistence.UserEntity;
+import de.adesso.spot.persistence.UserRepository;
+import de.adesso.spot.service.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,16 +19,27 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 @CrossOrigin
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+    @Autowired
+    private MyUserDetailsService userDetailsService;
+
+//    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home").permitAll()
+                        .requestMatchers("/", "/home", "/registration").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -30,7 +47,7 @@ public class WebSecurityConfig {
                         .defaultSuccessUrl("/spot.html", true)
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll());
+                .logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }
@@ -48,7 +65,7 @@ public class WebSecurityConfig {
                         .roles("ADMIN")
                         .build();
 
-        return new InMemoryUserDetailsManager(simon, samuel);
+        return userDetailsService;
     }
 
     @Bean
